@@ -3,8 +3,6 @@ package gr.ds.restapi.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "vet")
-@PrimaryKeyJoinColumn(name="ID")
 public class Vet  extends User{
 
     @Column(name = "name")

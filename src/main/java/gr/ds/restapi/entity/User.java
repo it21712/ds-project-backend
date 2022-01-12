@@ -2,14 +2,13 @@ package gr.ds.restapi.entity;
 
 import javax.persistence.*;
 
+
 @Entity
-@Table(name = "user")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
     private int id;
 
     @Column(name = "username")
