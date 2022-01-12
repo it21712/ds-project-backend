@@ -3,7 +3,7 @@ package gr.ds.restapi.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "authorities", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "authority"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "authority"})})
 public class Authority {
 
     @Id

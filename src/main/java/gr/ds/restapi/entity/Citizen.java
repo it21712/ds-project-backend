@@ -5,8 +5,6 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "citizen")
-@PrimaryKeyJoinColumn(name = "id")
 public class Citizen extends User {
 
     @Column(name = "address")
@@ -18,12 +16,25 @@ public class Citizen extends User {
     @Column(name = "email")
     private String email;
 
-    protected Citizen(){}
+    public Citizen(){}
+
+
 
     public Citizen(String address, int phoneNumber, String email) {
+
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Citizen(int id, String username, String passcode, String fullName, String region, int enabled, String address, int phoneNumber, String email ){
+        this(address, phoneNumber, email);
+        setId(id);
+        setUsername(username);
+        setPasscode(passcode);
+        setFullName(fullName);
+        setRegion(region);
+        setEnabled(enabled);
     }
 
     public String getAddress() {

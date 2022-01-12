@@ -3,7 +3,6 @@ package gr.ds.restapi.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pet")
 public class Pet {
 
     @Id
