@@ -8,7 +8,7 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        <h2>CRM - Citizen Relationship Manager</h2>
+        <h2>You are viewing all Citizens</h2>
     </div>
 </div>
 

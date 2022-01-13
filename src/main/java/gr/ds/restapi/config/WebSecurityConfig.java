@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic().and().authorizeRequests()
-                .antMatchers("/api").hasRole("ADMIN")
+                .antMatchers("/api/**").hasRole("ADMIN")
                 .antMatchers("/info").hasRole("USER")
                 .and().csrf().disable().headers().frameOptions().disable()
                 .and().formLogin().permitAll().defaultSuccessUrl("/home")
