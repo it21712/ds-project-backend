@@ -1,10 +1,9 @@
 package gr.ds.restapi.entity;
 
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 public class MedicalHistory {
 
     @Id
