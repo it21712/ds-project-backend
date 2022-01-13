@@ -1,14 +1,15 @@
 package gr.ds.restapi.entity;
 
 import javax.persistence.*;
-
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", updatable = false, nullable = true)
     private int id;
 
     @Column(name = "username")
@@ -26,6 +27,18 @@ public class User {
     @Column(name = "enabled")
     private int enabled;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "role_id", nullable = true)
+    )
+    private Set<Role> roles = new HashSet<>();
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
     protected User(){}
 
     public User(int id, String username, String passcode, String fullName, String region, int enabled) {
@@ -36,7 +49,6 @@ public class User {
         this.region = region;
         this.enabled = enabled;
     }
-
 
     public int getId() {
         return id;
@@ -85,4 +97,9 @@ public class User {
     public void setEnabled(int enabled) {
         this.enabled = enabled;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
 }

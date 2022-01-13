@@ -14,8 +14,11 @@ public class HomeController {
 
         if(request.isUserInRole("ROLE_ADMIN")){
             return "Welcome admin";
-        }else{
-            return "Welcome default user!!";
+        }else if(request.isUserInRole("ROLE_USER")){
+            return "Welcome user!!";
+        }
+        else{
+            return "not logged in yet.";
         }
     }
 

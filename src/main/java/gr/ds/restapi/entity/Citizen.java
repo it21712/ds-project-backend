@@ -3,7 +3,6 @@ package gr.ds.restapi.entity;
 
 import javax.persistence.*;
 
-
 @Entity
 public class Citizen extends User {
 
@@ -17,8 +16,6 @@ public class Citizen extends User {
     private String email;
 
     public Citizen(){}
-
-
 
     public Citizen(String address, int phoneNumber, String email) {
 

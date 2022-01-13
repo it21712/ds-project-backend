@@ -2,7 +2,7 @@ package gr.ds.restapi.entity;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Pet {
 
     @Id

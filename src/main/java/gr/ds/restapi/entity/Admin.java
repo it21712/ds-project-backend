@@ -1,16 +1,13 @@
 package gr.ds.restapi.entity;
 
-import javax.persistence.*;
-
+import javax.persistence.Entity;
 
 @Entity
-public class CivicOfficial extends User{
+public class Admin extends User{
 
-    protected CivicOfficial(){}
+    public Admin(){}
 
-
-
-    public CivicOfficial(int id, String username, String passcode, String fullName, String region, int enabled) {
+    public Admin(int id, String username, String passcode, String fullName, String region, int enabled) {
         setId(id);
         setUsername(username);
         setPasscode(passcode);

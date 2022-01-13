@@ -1,11 +1,10 @@
 package gr.ds.restapi.dao;
 
 import gr.ds.restapi.entity.Citizen;
-import gr.ds.restapi.entity.User;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 import org.springframework.stereotype.Repository;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 @Repository
 public class CitizenDAOImpl implements UserDAO<Citizen>{
