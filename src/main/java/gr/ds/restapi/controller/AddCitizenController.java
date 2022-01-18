@@ -65,19 +65,10 @@ public class AddCitizenController {
     @GetMapping("/add-civics")
     public String addCivs(){
 
-        CivicOfficial citizen1 = new CivicOfficial(33000, "user1", "user", "User 1", "region1", 1);
-        citizen1.addRole(new Role("ROLE_CVC"));
-        citizen1.addRole(new Role("ROLE_MNG"));
+        CivicOfficial citizen1 = new CivicOfficial(33000, "user1", "user", "User 1", "Kallithea, Attica, Greece", 1);
+        citizen1.addRole(new Role("ROLE_CIVIC"));
         civicDAO.addUser(citizen1);
-        CivicOfficial citizen2 = new CivicOfficial(66667, "user2", "user", "User 2", "region2", 1);
-        citizen2.addRole(new Role("ROLE_CVC"));
-        civicDAO.addUser(citizen2);
-        CivicOfficial citizen3 = new CivicOfficial(77778, "user3", "user", "User 3", "region3", 1);
-        citizen3.addRole(new Role("ROLE_CVC"));
-        civicDAO.addUser(citizen3);
-        CivicOfficial citizen4 = new CivicOfficial(8889, "user4", "user", "User 4", "region4", 1);
-        citizen4.addRole(new Role("ROLE_CVC"));
-        civicDAO.addUser(citizen4);
+
 
         return "done";
 

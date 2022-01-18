@@ -3,6 +3,7 @@ package gr.ds.restapi.controller;
 import gr.ds.restapi.dao.CitizenDAOImpl;
 import gr.ds.restapi.dao.UserDAO;
 import gr.ds.restapi.entity.Citizen;
+import gr.ds.restapi.entity.Role;
 import gr.ds.restapi.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -66,6 +67,7 @@ public class UserController {
         model.addAttribute("email", citizen.getEmail());
         model.addAttribute("enabled", citizen.getEnabled());
 
+        citizen.addRole(new Role("ROLE_USER"));
         citizenDAO.addUser(citizen);
 
         return "success-form";

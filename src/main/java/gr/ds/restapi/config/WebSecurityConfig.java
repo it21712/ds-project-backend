@@ -18,22 +18,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    String credStringQuery = "select u1.username, u1.passcode, u1.enabled  from (select id, username, passcode, enabled from citizen union select id, username, passcode, enabled from civic_official union select id, username, passcode, enabled from vet union select id, username, passcode, enabled from admin ) as u1 join user_roles on u1.id = user_roles.user_id join role r on r.id=user_roles.role_id where username =?";
-    String authStringQuery = "select u1.username, name from (select id, username from citizen union select id, username from vet union select id, username from admin ) as u1 join user_roles on u1.id = user_roles.user_id join role r on r.id=user_roles.role_id where u1.username= ?";
+    private final String credStringQuery = "select u1.username, u1.passcode, u1.enabled  from (select id, username, passcode, enabled from citizen union select id, username, passcode, enabled from civic_official union select id, username, passcode, enabled from vet union select id, username, passcode, enabled from admin ) as u1 join user_roles on u1.id = user_roles.user_id join role r on r.id=user_roles.role_id where username =?";
+    private final String authStringQuery = "select u1.username, name from (select id, username from citizen union select id, username from civic_official union select id, username from vet union select id, username from admin ) as u1 join user_roles on u1.id = user_roles.user_id join role r on r.id=user_roles.role_id where u1.username= ?";
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder())
                 .usersByUsernameQuery(credStringQuery)
                 .authoritiesByUsernameQuery(authStringQuery);
-                //.authoritiesByUsernameQuery("select username, authority from authority left join user on authority.user_id = user.id where username = ?");
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic().and().authorizeRequests()
-                .antMatchers("/api/**").hasRole("ADMIN")
-                .antMatchers("/info").hasRole("USER")
+                .antMatchers("/api").hasRole("ADMIN")
+                .antMatchers("/citizen/**").hasRole("USER")
+                .and()
+                .exceptionHandling().accessDeniedPage("/welcome/error")
                 .and().csrf().disable().headers().frameOptions().disable()
                 .and().formLogin().permitAll().defaultSuccessUrl("/home")
                 .and().logout().permitAll();

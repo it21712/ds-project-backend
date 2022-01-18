@@ -12,9 +12,9 @@ public class MedicalHistory {
     private int id;
 
     @Column(name = "opperation")
-    private String opperation;
+    private String operation;
 
-    @Column(name = "pet_number",insertable=false, updatable=false)
+    @Column(name = "pet_number", insertable=false, updatable=false)
     private int petNumber;
 
     @ManyToOne
@@ -23,10 +23,10 @@ public class MedicalHistory {
 
     protected MedicalHistory(){}
 
-    public MedicalHistory(int id, String opperation, int petNumber, Pet pet) {
+    public MedicalHistory(int id, String operation, Pet pet) {
         this.id = id;
-        this.opperation = opperation;
-        this.petNumber = petNumber;
+        this.operation = operation;
+        this.petNumber = pet.getSerialNumber();
         this.pet = pet;
     }
 
@@ -38,12 +38,12 @@ public class MedicalHistory {
         this.id = id;
     }
 
-    public String getOpperation() {
-        return opperation;
+    public String getOperation() {
+        return operation;
     }
 
-    public void setOpperation(String opperation) {
-        this.opperation = opperation;
+    public void setOperation(String opperation) {
+        this.operation = opperation;
     }
 
     public int getPetNumber() {

@@ -40,4 +40,9 @@ public class AdminDAOImpl implements UserDAO{
     public int updateUser(User user) {
         return 0;
     }
+
+    @Override
+    public User getUser(String username) {
+        return null;
+    }
 }

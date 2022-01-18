@@ -18,4 +18,9 @@ public class CivicOfficial extends User{
         setRegion(region);
         setEnabled(enabled);
     }
+
+    public CivicOfficial(String fullName, String region){
+        this.setFullName(fullName);
+        this.setRegion(region);
+    }
 }

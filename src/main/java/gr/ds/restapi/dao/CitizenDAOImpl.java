@@ -2,6 +2,7 @@ package gr.ds.restapi.dao;
 
 import gr.ds.restapi.entity.Citizen;
 
+import gr.ds.restapi.entity.Pet;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 
 @Repository
@@ -74,10 +76,22 @@ public class CitizenDAOImpl implements UserDAO<Citizen>{
 
         session.update(citizen);
 
-
-
         return 0;
     }
+
+    @Override
+    @Transactional
+    public Citizen getUser(String username){
+
+        Session session = entityManager.unwrap(Session.class);
+
+        Citizen tmp = session.createQuery("SELECT c FROM Citizen c WHERE c.username = :username", Citizen.class).setParameter("username", username).getSingleResult();
+
+        Citizen citizen = new Citizen(tmp.getFullName(), tmp.getRegion(), tmp.getAddress(), tmp.getPhoneNumber());
+
+        return tmp;
+    }
+
 
 
 }

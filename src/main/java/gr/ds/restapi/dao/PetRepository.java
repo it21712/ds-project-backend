@@ -1,0 +1,31 @@
+package gr.ds.restapi.dao;
+
+import gr.ds.restapi.entity.Citizen;
+import gr.ds.restapi.entity.Pet;
+import org.hibernate.Session;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import java.util.List;
+
+@Repository
+public interface PetRepository extends CrudRepository<Pet, Integer> {
+
+
+    @Query("select new Pet(p.serialNumber, p.birthDate, p.race, p.sex, p.type, p.is_approved) from Pet p join Citizen c on p.ownerCode = c.id where c.username= ?1")
+    List<Pet> getPetsByCitizenName(String username);
+
+    @Query("select new Pet(p.serialNumber, p.birthDate, p.race, p.sex, p.type, p.is_approved) from Pet p join Citizen c on p.ownerCode = c.id where c.username= ?1 and p.is_approved = 0")
+    List<Pet> getPendingPetsByCitizenName(String username);
+
+    @Query("select new Pet(p.serialNumber, p.birthDate, p.race, p.sex, p.type, p.is_approved, p.ownerCode) from Pet p join Citizen c on p.ownerCode = c.id join CivicOfficial co on c.region = co.region where co.region= ?1")
+    List<Pet> getPetsByRegion(String region);
+
+
+}

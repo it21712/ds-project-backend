@@ -8,4 +8,7 @@ public class WelcomeController {
 
     @GetMapping("/welcome")
     public String welcome(){ return "Welcome!!"; }
+
+    @GetMapping("/welcome/error")
+    public String error(){ return "Access Denied!!";}
 }

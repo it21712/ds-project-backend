@@ -9,10 +9,10 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name = "id", updatable = false, nullable = true)
+    @Column(name = "id", updatable = false)
     private int id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "passcode")
@@ -30,8 +30,8 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id", nullable = true),
-            inverseJoinColumns = @JoinColumn(name = "role_id", nullable = true)
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
 

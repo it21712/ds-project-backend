@@ -1,6 +1,10 @@
 package gr.ds.restapi.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Pet {
@@ -12,10 +16,9 @@ public class Pet {
     @Column(name = "owner_code",insertable=false, updatable=false)
     private int ownerCode;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name ="owner_code", referencedColumnName = "id")
     private Citizen citizen;
-
 
     @Column(name = "type")
     private String type;
@@ -32,17 +35,54 @@ public class Pet {
     @Column(name = "is_approved")
     private int is_approved;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<MedicalHistory> medicalOps = new ArrayList<>();
+
     protected Pet(){}
 
-    public Pet(int serialNumber, int ownerCode, Citizen citizen, String type, String race, String sex, String birthDate, int is_approved) {
+
+
+    public Pet(int serialNumber, Citizen citizen, String type, String race, String sex, String birthDate, int is_approved) {
         this.serialNumber = serialNumber;
-        this.ownerCode = ownerCode;
         this.citizen = citizen;
+        this.ownerCode = citizen.getId();
         this.type = type;
         this.race = race;
         this.sex = sex;
         this.birthDate = birthDate;
         this.is_approved = is_approved;
+    }
+
+    public Pet(int serialNumber, int ownerCode, String type, String race, String sex, String birthDate, int is_approved) {
+        this.serialNumber = serialNumber;
+        this.ownerCode = ownerCode;
+        this.type = type;
+        this.race = race;
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.is_approved = is_approved;
+    }
+
+    public Pet(int serialNumber, String birthDate, String race, String sex, String type, int is_approved){
+        this.serialNumber = serialNumber;
+        this.birthDate = birthDate;
+        this.race = race;
+        this.sex = sex;
+        this.type = type;
+        this.is_approved = is_approved;
+    }
+    public Pet(int serialNumber, String birthDate, String race, String sex, String type, int is_approved, int ownerCode){
+        this.serialNumber = serialNumber;
+        this.birthDate = birthDate;
+        this.race = race;
+        this.sex = sex;
+        this.type = type;
+        this.is_approved = is_approved;
+        this.ownerCode = ownerCode;
+    }
+
+    public void addMedicalOp(MedicalHistory operation){
+        medicalOps.add(operation);
     }
 
     public int getSerialNumber() {

@@ -2,6 +2,10 @@ package gr.ds.restapi.entity;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Citizen extends User {
@@ -15,6 +19,10 @@ public class Citizen extends User {
     @Column(name = "email")
     private String email;
 
+    @OneToMany(mappedBy = "citizen", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<Pet> pets = new ArrayList<>();
+
+
     public Citizen(){}
 
     public Citizen(String address, int phoneNumber, String email) {
@@ -22,6 +30,13 @@ public class Citizen extends User {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Citizen(String fullName, String region, String address, int phoneNumber){
+        this.setFullName(fullName);
+        this.setRegion(region);
+        this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
     public Citizen(int id, String username, String passcode, String fullName, String region, int enabled, String address, int phoneNumber, String email ){
@@ -32,6 +47,10 @@ public class Citizen extends User {
         setFullName(fullName);
         setRegion(region);
         setEnabled(enabled);
+    }
+
+    public void addPet(Pet pet){
+        pets.add(pet);
     }
 
     public String getAddress() {
@@ -57,6 +76,8 @@ public class Citizen extends User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public List<Pet> getPets(){ return pets; }
 
 
 }
