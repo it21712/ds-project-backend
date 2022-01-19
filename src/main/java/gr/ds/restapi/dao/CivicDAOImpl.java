@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class CivicDAOImpl implements UserDAO<CivicOfficial> {
+public class CivicDAOImpl implements EntityDAO<CivicOfficial> {
 
     @PersistenceContext
     EntityManager entityManager;

@@ -2,14 +2,13 @@ package gr.ds.restapi.controller;
 
 import com.google.gson.Gson;
 import gr.ds.restapi.dao.PetRepository;
-import gr.ds.restapi.dao.UserDAO;
+import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.CivicOfficial;
 import gr.ds.restapi.entity.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ import java.util.List;
 public class CivicController {
 
     @Autowired
-    UserDAO<CivicOfficial> civicDAO;
+    EntityDAO<CivicOfficial> civicDAO;
 
     @Autowired
     PetRepository petRepository;

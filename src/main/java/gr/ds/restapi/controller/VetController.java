@@ -1,7 +1,8 @@
 package gr.ds.restapi.controller;
 
 import com.google.gson.Gson;
-import gr.ds.restapi.dao.UserDAO;
+import gr.ds.restapi.dao.EntityDAO;
+import gr.ds.restapi.entity.MedicalHistory;
 import gr.ds.restapi.entity.Pet;
 import gr.ds.restapi.entity.Vet;
 import gr.ds.restapi.services.PetService;
@@ -18,7 +19,10 @@ import java.util.List;
 public class VetController {
 
     @Autowired
-    UserDAO<Vet> vetDAO;
+    EntityDAO<Vet> vetDAO;
+
+    @Autowired
+    EntityDAO<Pet> petDAO;
 
     @Autowired
     PetService petService;
@@ -62,6 +66,21 @@ public class VetController {
         return new Gson().toJson(petResponse, Pet.class);
     }
 
+
+    @PostMapping("/update-med-history")
+    public String updatePetHistory(@RequestBody MedicalHistory medOp){
+
+        Pet pet = petService.getById(medOp.getPetNumber());
+
+        medOp.setPet(pet);
+
+        pet.addMedicalOp(medOp);
+
+        petDAO.updateUser(pet);
+
+        return medOp.getOperation();
+
+    }
 
 
 }

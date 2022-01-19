@@ -1,6 +1,6 @@
 package gr.ds.restapi.controller;
 
-import gr.ds.restapi.dao.UserDAO;
+import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class AddCitizenController {
 
     @Autowired
-    private UserDAO<Citizen> citizenDAO;
+    private EntityDAO<Citizen> citizenDAO;
 
     @Autowired
-    private UserDAO<Admin> adminDAO;
+    private EntityDAO<Admin> adminDAO;
 
     @Autowired
-    private UserDAO<CivicOfficial> civicDAO;
+    private EntityDAO<CivicOfficial> civicDAO;
 
 
     @GetMapping("/add-citizen")

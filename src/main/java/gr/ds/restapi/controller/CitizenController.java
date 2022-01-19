@@ -2,7 +2,7 @@ package gr.ds.restapi.controller;
 
 import com.google.gson.Gson;
 
-import gr.ds.restapi.dao.UserDAO;
+import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.Citizen;
 import gr.ds.restapi.entity.Pet;
 import gr.ds.restapi.services.PetService;
@@ -25,7 +25,7 @@ public class CitizenController {
 
 
     @Autowired
-    UserDAO<Citizen> citizenDAO;
+    EntityDAO<Citizen> citizenDAO;
 
     /*@Autowired
     IPetService petService;*/

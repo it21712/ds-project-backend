@@ -17,9 +17,9 @@ public class MedicalHistory {
     @Column(name = "pet_number", insertable=false, updatable=false)
     private int petNumber;
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "pet_number", referencedColumnName = "serial_number")
-    private Pet pet;*/
+    private Pet pet;
 
     protected MedicalHistory(){}
 
@@ -29,10 +29,9 @@ public class MedicalHistory {
         this.petNumber = pet.getSerialNumber();
         this.pet = pet;
     }*/
-    public MedicalHistory(int id, String operation) {
-        this.id = id;
+    public MedicalHistory(int petNumber, String operation) {
+        this.petNumber = petNumber;
         this.operation = operation;
-
     }
 
     public int getId() {
@@ -59,11 +58,11 @@ public class MedicalHistory {
         this.petNumber = petNumber;
     }
 
-    /*public Pet getPet() {
+    public Pet getPet() {
         return pet;
     }
 
     public void setPet(Pet pet) {
         this.pet = pet;
-    }*/
+    }
 }

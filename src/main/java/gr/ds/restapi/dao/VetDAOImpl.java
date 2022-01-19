@@ -1,6 +1,5 @@
 package gr.ds.restapi.dao;
 
-import gr.ds.restapi.entity.CivicOfficial;
 import gr.ds.restapi.entity.Vet;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -10,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class VetDAOImpl implements UserDAO<Vet> {
+public class VetDAOImpl implements EntityDAO<Vet> {
 
     @PersistenceContext
     EntityManager entityManager;

@@ -1,6 +1,7 @@
 package gr.ds.restapi.services;
 
 import gr.ds.restapi.dao.PetRepository;
+import gr.ds.restapi.entity.MedicalHistory;
 import gr.ds.restapi.entity.Pet;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class PetService implements PetRepository {
     public void verifyPet(int petId) {
         petRepository.verifyPet(petId);
     }
+
 
 
     @Override

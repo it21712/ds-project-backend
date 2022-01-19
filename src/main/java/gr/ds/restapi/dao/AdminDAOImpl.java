@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class AdminDAOImpl implements UserDAO{
+public class AdminDAOImpl implements EntityDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -22,7 +22,7 @@ public class AdminDAOImpl implements UserDAO{
 
     @Override
     @Transactional
-    public int addUser(User user) {
+    public int addUser(Object user) {
 
         Session session = entityManager.unwrap(Session.class);
 
@@ -37,7 +37,7 @@ public class AdminDAOImpl implements UserDAO{
     }
 
     @Override
-    public int updateUser(User user) {
+    public int updateUser(Object user) {
         return 0;
     }
 

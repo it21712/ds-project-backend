@@ -1,5 +1,6 @@
 package gr.ds.restapi.dao;
 
+import gr.ds.restapi.entity.MedicalHistory;
 import gr.ds.restapi.entity.Pet;
 
 import org.springframework.data.jpa.repository.JpaRepository;
