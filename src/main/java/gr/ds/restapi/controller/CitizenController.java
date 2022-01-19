@@ -5,8 +5,10 @@ import com.google.gson.Gson;
 import gr.ds.restapi.dao.UserDAO;
 import gr.ds.restapi.entity.Citizen;
 import gr.ds.restapi.entity.Pet;
-import gr.ds.restapi.services.IPetService;
+import gr.ds.restapi.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,8 +27,11 @@ public class CitizenController {
     @Autowired
     UserDAO<Citizen> citizenDAO;
 
+    /*@Autowired
+    IPetService petService;*/
+
     @Autowired
-    IPetService petService;
+    PetService petService;
 
     @GetMapping("/home")
     public String CitizenInfo(){
@@ -42,27 +47,18 @@ public class CitizenController {
         return json;
     }
 
-    @PostMapping(value = "/add", consumes = "application/json")
-    @ResponseBody
-    public String addPet(){
-
-        return "";
-    }
-
-
-    @GetMapping("/add-pet")
-    public String add(){
-
+    @PostMapping("/add-pet")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> addPet(@RequestBody Pet pet){
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
         Citizen citizen = citizenDAO.getUser(username);
-        /*Pet pet = new Pet(1216, citizen, "type1", "race1", "sex1", "date1", 0);
-        petRepository.addPet(pet);*/
-        citizen.addPet(new Pet(1111, citizen, "type1", "race1", "sex1", "date1", 1));
+        pet.setCitizen(citizen);
+        citizen.addPet(pet);
         citizenDAO.updateUser(citizen);
-        return "pet ok";
+        return new ResponseEntity<>(pet.getSerialNumber(), HttpStatus.CREATED);
     }
 
     @GetMapping("/pets")
@@ -94,6 +90,8 @@ public class CitizenController {
         return json;
 
     }
+
+
 
 
 }

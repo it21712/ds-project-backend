@@ -2,9 +2,8 @@ package gr.ds.restapi.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 public class Pet {
@@ -71,6 +70,17 @@ public class Pet {
         this.type = type;
         this.is_approved = is_approved;
     }
+
+    public Pet(int serialNumber, String birthDate, String race, String sex, String type, int is_approved, Citizen citizen){
+        this.serialNumber = serialNumber;
+        this.birthDate = birthDate;
+        this.race = race;
+        this.sex = sex;
+        this.type = type;
+        this.is_approved = is_approved;
+        this.citizen = citizen;
+    }
+
     public Pet(int serialNumber, String birthDate, String race, String sex, String type, int is_approved, int ownerCode){
         this.serialNumber = serialNumber;
         this.birthDate = birthDate;

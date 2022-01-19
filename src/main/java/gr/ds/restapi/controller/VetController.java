@@ -2,15 +2,16 @@ package gr.ds.restapi.controller;
 
 import com.google.gson.Gson;
 import gr.ds.restapi.dao.UserDAO;
-import gr.ds.restapi.entity.CivicOfficial;
+import gr.ds.restapi.entity.Pet;
 import gr.ds.restapi.entity.Vet;
+import gr.ds.restapi.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("vet")
@@ -18,6 +19,9 @@ public class VetController {
 
     @Autowired
     UserDAO<Vet> vetDAO;
+
+    @Autowired
+    PetService petService;
 
     @GetMapping("/home")
     public String info(){
@@ -31,4 +35,33 @@ public class VetController {
 
         return json;
     }
+
+    @PostMapping("/show-pending")
+    public String showPending(@RequestBody String citizenName){
+
+        List<Pet> pendingPets = petService.getPendingPetsByCitizenName(citizenName);
+
+        String json = new Gson().toJson(pendingPets);
+
+        return json;
+    }
+
+    @PostMapping("/verify-pet")
+    public String verifyPet(@RequestBody String petSerialNum){
+
+        int serialNum = Integer.parseInt(petSerialNum);
+
+        Pet pet = petService.getById(serialNum);
+        System.out.println("pet pending: " + pet.getIs_approved());
+        pet.setIs_approved(1);
+        System.out.println("pet pending: " + pet.getIs_approved());
+        petService.verifyPet(pet.getSerialNumber());
+
+        Pet petResponse = new Pet(pet.getSerialNumber(), pet.getOwnerCode(), pet.getType(), pet.getRace(), pet.getSex(), pet.getBirthDate(), pet.getIs_approved());
+
+        return new Gson().toJson(petResponse, Pet.class);
+    }
+
+
+
 }
