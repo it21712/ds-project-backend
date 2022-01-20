@@ -1,14 +1,16 @@
 package gr.ds.restapi.entity;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Citizen extends User {
+
+    @Column(name = "code")
+    private int code;
 
     @Column(name = "address")
     private String address;
@@ -32,6 +34,19 @@ public class Citizen extends User {
         this.email = email;
     }
 
+    public Citizen(int id, int code, String username, String passCode, String fullName, String region, String address, int phoneNumber, String email, boolean enabled){
+        this.code = code;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.setId(id);
+        this.setRegion(region);
+        this.setFullName(fullName);
+        this.setUsername(username);
+        this.setPasscode(passCode);
+        this.setEnabled(enabled);
+    }
+
     public Citizen(String fullName, String region, String address, int phoneNumber){
         this.setFullName(fullName);
         this.setRegion(region);
@@ -39,18 +54,25 @@ public class Citizen extends User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Citizen(int id, String username, String passcode, String fullName, String region, int enabled, String address, int phoneNumber, String email ){
-        this(address, phoneNumber, email);
-        setId(id);
-        setUsername(username);
-        setPasscode(passcode);
-        setFullName(fullName);
-        setRegion(region);
-        setEnabled(enabled);
+    public Citizen(int code, String fullName, String region, String address, int phoneNumber){
+        this.code = code;
+        this.setFullName(fullName);
+        this.setRegion(region);
+        this.address = address;
+        this.phoneNumber = phoneNumber;
     }
+
 
     public void addPet(Pet pet){
         pets.add(pet);
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getAddress() {

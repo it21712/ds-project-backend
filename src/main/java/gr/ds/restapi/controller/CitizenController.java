@@ -40,24 +40,24 @@ public class CitizenController {
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
-        Citizen citizen = citizenDAO.getUser(username);
+        Citizen citizen = citizenDAO.getEntity(username);
 
         String json = new Gson().toJson(citizen);
 
         return json;
     }
 
-    @PostMapping("/add-pet")
+    @PostMapping("/add-pet") //TODO fix empty json request
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> addPet(@RequestBody Pet pet){
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
-        Citizen citizen = citizenDAO.getUser(username);
+        Citizen citizen = citizenDAO.getEntity(username);
         pet.setCitizen(citizen);
         citizen.addPet(pet);
-        citizenDAO.updateUser(citizen);
+        citizenDAO.updateEntity(citizen);
         return new ResponseEntity<>(pet.getSerialNumber(), HttpStatus.CREATED);
     }
 

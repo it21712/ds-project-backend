@@ -3,6 +3,7 @@ package gr.ds.restapi.controller;
 import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.Citizen;
 import gr.ds.restapi.entity.Role;
+import gr.ds.restapi.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class UserController {
     private EntityDAO<Citizen> citizenDAO;
 
 
+
     @RequestMapping("/all")
     public String listCitizens(Model model){
 
@@ -40,34 +42,6 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/add-citizen", method = RequestMethod.GET)
-    public ModelAndView showForm() {
-        return new ModelAndView("citizen_form", "citizen", new Citizen());
-    }
-
-    @RequestMapping(value = "/add-citizen-ok", method = RequestMethod.POST)
-    public String submitForm(@ModelAttribute("citizen")Citizen citizen,
-                         BindingResult result, ModelMap model){
-
-        if(result.hasErrors()){
-            return "error-form";
-        }
-
-        model.addAttribute("id", citizen.getId());
-        model.addAttribute("username", citizen.getUsername());
-        model.addAttribute("passcode", citizen.getPasscode());
-        model.addAttribute("fullName", citizen.getFullName());
-        model.addAttribute("region", citizen.getRegion());
-        model.addAttribute("address", citizen.getAddress());
-        model.addAttribute("phoneNumber", citizen.getPhoneNumber());
-        model.addAttribute("email", citizen.getEmail());
-        model.addAttribute("enabled", citizen.getEnabled());
-
-        citizen.addRole(new Role("ROLE_USER"));
-        citizenDAO.addUser(citizen);
-
-        return "success-form";
-    }
 
 
 }

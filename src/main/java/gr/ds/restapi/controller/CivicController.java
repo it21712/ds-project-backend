@@ -31,7 +31,7 @@ public class CivicController {
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
-        CivicOfficial civic = civicDAO.getUser(username);
+        CivicOfficial civic = civicDAO.getEntity(username);
 
         String json = new Gson().toJson(civic);
 
@@ -45,9 +45,10 @@ public class CivicController {
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
-        CivicOfficial civic = civicDAO.getUser(username);
+        CivicOfficial civic = civicDAO.getEntity(username);
 
         List<Pet> pets = petRepository.getPetsByRegion(civic.getRegion());
+
 
         String json = new Gson().toJson(pets);
 

@@ -21,23 +21,23 @@ public class CivicDAOImpl implements EntityDAO<CivicOfficial> {
     }
 
     @Override
-    public int addUser(CivicOfficial user) {
+    public int addEntity(CivicOfficial user) {
         return 0;
     }
 
     @Override
-    public int deleteUser(int id) {
+    public int deleteEntityByUsername(int id) {
         return 0;
     }
 
     @Override
-    public int updateUser(CivicOfficial user) {
+    public int updateEntity(CivicOfficial user) {
         return 0;
     }
 
     @Override
     @Transactional
-    public CivicOfficial getUser(String username) {
+    public CivicOfficial getEntity(String username) {
 
         Session session = entityManager.unwrap(Session.class);
 

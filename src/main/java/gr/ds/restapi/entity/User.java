@@ -1,15 +1,15 @@
 package gr.ds.restapi.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
-    @Column(name = "id", updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id", updatable = false)
     private int id;
 
     @Column(name = "username", unique = true)
@@ -25,7 +25,8 @@ public class User {
     private String region;
 
     @Column(name = "enabled")
-    private int enabled;
+    private boolean enabled;
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -38,11 +39,18 @@ public class User {
     public void addRole(Role role) {
         roles.add(role);
     }
+    public void removeRole(Role role){roles.remove(role);}
+    public User(){}
 
-    protected User(){}
-
-    public User(int id, String username, String passcode, String fullName, String region, int enabled) {
+    public User(int id, String username, String passcode, String fullName, String region, boolean enabled) {
         this.id = id;
+        this.username = username;
+        this.passcode = passcode;
+        this.fullName = fullName;
+        this.region = region;
+        this.enabled = enabled;
+    }
+    public User(String username, String passcode, String fullName, String region, boolean enabled) {
         this.username = username;
         this.passcode = passcode;
         this.fullName = fullName;
@@ -90,11 +98,11 @@ public class User {
         this.region = region;
     }
 
-    public int getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(int enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 

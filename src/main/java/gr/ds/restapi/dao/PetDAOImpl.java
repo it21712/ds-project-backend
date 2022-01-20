@@ -21,18 +21,18 @@ public class PetDAOImpl  implements EntityDAO<Pet> {
     }
 
     @Override
-    public int addUser(Pet user) {
+    public int addEntity(Pet user) {
         return 0;
     }
 
     @Override
-    public int deleteUser(int id) {
+    public int deleteEntityByUsername(int id) {
         return 0;
     }
 
     @Override
     @Transactional
-    public int updateUser(Pet pet) {
+    public int updateEntity(Pet pet) {
 
         Session session = entityManager.unwrap(Session.class);
 
@@ -49,7 +49,7 @@ public class PetDAOImpl  implements EntityDAO<Pet> {
     }
 
     @Override
-    public Pet getUser(String username) {
+    public Pet getEntity(String username) {
         return null;
     }
 }

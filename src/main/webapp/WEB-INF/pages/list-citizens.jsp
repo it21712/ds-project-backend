@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: konstantinos
+  Date: 20/1/2022
+  Time: 3:40 μ.μ.
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +24,7 @@
         <!--  add our html table here -->
         <table>
             <tr>
-                <th>Id</th>
+                <th>Code</th>
                 <th>Full Name</th>
                 <th>Address</th>
                 <th>Phone Number</th>
@@ -27,7 +34,7 @@
             <c:forEach var="citizen" items="${citizens}">
 
                 <tr>
-                    <td>${citizen.id}</td>
+                    <td>${citizen.code}</td>
                     <td>${citizen.fullName}</td>
                     <td>${citizen.address}</td>
                     <td>${citizen.phoneNumber}</td>

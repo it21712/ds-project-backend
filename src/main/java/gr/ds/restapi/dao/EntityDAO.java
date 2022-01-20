@@ -4,18 +4,18 @@ package gr.ds.restapi.dao;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface EntityDAO<EntityType> {
+public interface EntityDAO<EntityType>  {
 
     List<EntityType> showALl();
 
-    int addUser(EntityType user);
+    int addEntity(EntityType entity);
 
     @Transactional
-    int deleteUser(int id);
+    int deleteEntityByUsername(int id);
 
     @Transactional
-    int updateUser(EntityType user);
+    int updateEntity(EntityType entity);
 
-    EntityType getUser(String username);
+    EntityType getEntity(String username);
 
 }

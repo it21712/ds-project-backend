@@ -33,7 +33,7 @@ public class VetController {
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
-        Vet vet = vetDAO.getUser(username);
+        Vet vet = vetDAO.getEntity(username);
 
         String json = new Gson().toJson(vet);
 
@@ -72,11 +72,14 @@ public class VetController {
 
         Pet pet = petService.getById(medOp.getPetNumber());
 
+        if(pet.getIs_approved() == 0){
+            return "Pet with serial number: " + pet.getSerialNumber()+ " is not verified.\nPlease verify it first and then update its medical history";
+        }
         medOp.setPet(pet);
 
         pet.addMedicalOp(medOp);
 
-        petDAO.updateUser(pet);
+        petDAO.updateEntity(pet);
 
         return medOp.getOperation();
 

@@ -22,7 +22,7 @@ public class AdminDAOImpl implements EntityDAO {
 
     @Override
     @Transactional
-    public int addUser(Object user) {
+    public int addEntity(Object user) {
 
         Session session = entityManager.unwrap(Session.class);
 
@@ -32,17 +32,17 @@ public class AdminDAOImpl implements EntityDAO {
     }
 
     @Override
-    public int deleteUser(int id) {
+    public int deleteEntityByUsername(int id) {
         return 0;
     }
 
     @Override
-    public int updateUser(Object user) {
+    public int updateEntity(Object user) {
         return 0;
     }
 
     @Override
-    public User getUser(String username) {
+    public User getEntity(String username) {
         return null;
     }
 }

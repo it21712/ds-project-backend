@@ -39,7 +39,7 @@ public class CitizenDAOImpl implements EntityDAO<Citizen> {
 
     @Override
     @Transactional
-    public int addUser(Citizen citizen) {
+    public int addEntity(Citizen citizen) {
 
         Session session = entityManager.unwrap(Session.class);
 
@@ -51,7 +51,7 @@ public class CitizenDAOImpl implements EntityDAO<Citizen> {
 
     @Override
     @Transactional
-    public int deleteUser(int id) {
+    public int deleteEntityByUsername(int id) {
 
         Session session = entityManager.unwrap(Session.class);
 
@@ -63,11 +63,12 @@ public class CitizenDAOImpl implements EntityDAO<Citizen> {
 
     @Override
     @Transactional
-    public int updateUser(Citizen citizen) {
+    public int updateEntity(Citizen citizen) {
 
         Session session = entityManager.unwrap(Session.class);
 
         int id = citizen.getId();
+        System.out.println(citizen.getCode());
         Citizen oldCitizen = session.createQuery("SELECT c FROM Citizen c WHERE c.id = :id", Citizen.class).setParameter("id", id).getSingleResult();
 
         session.evict(oldCitizen);
@@ -79,7 +80,7 @@ public class CitizenDAOImpl implements EntityDAO<Citizen> {
 
     @Override
     @Transactional
-    public Citizen getUser(String username){
+    public Citizen getEntity(String username){
 
         Session session = entityManager.unwrap(Session.class);
 

@@ -5,6 +5,7 @@
   Time: 8:02 μ.μ.
   To change this template use File | Settings | File Templates.
 --%>
+<%--
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
@@ -12,11 +13,11 @@
 <body>
 <h3>Enter The Citizen Details</h3>
 <form:form method="POST"
-           action="add-citizen-ok" modelAttribute="citizen">
+           action="citizen-added" modelAttribute="citizen">
     <table>
         <tr>
-            <td><form:label path="id">Id</form:label></td>
-            <td><form:input path="id"/></td>
+            <td><form:label path="code">Code</form:label></td>
+            <td><form:input path="code"/></td>
         </tr>
         <tr>
             <td><form:label path="username">Username</form:label></td>
@@ -58,3 +59,4 @@
 </form:form>
 </body>
 </html>
+--%>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new citizen</title>
+</head>
+<body>
+<h1>Citizen Data</h1>
+<form action="#" th:action="@{/api/root/users/add-citizen}" th:object="${citizen}" method="post">
+    <p>Code: <input type="number" th:field="${citizen.code}" /></p>
+    <p>Username: <input type="text" th:field="${citizen.username}" /></p>
+    <p>Passcode: <input type="text" th:field="${citizen.passcode}" /></p>
+    <p>Full Name: <input type="text" th:field="${citizen.fullName}" /></p>
+    <p>Region: <input type="text" th:field="${citizen.region}" /></p>
+    <p>Address: <input type="text" th:field="${citizen.address}" /></p>
+    <p>Phone Number: <input type="number" th:field="${citizen.phoneNumber}" /></p>
+    <p>Email: <input type="text" th:field="${citizen.email}" /></p>
+    <p>Enabled: <input type="checkbox" th:field="${citizen.enabled}" checked="0"/></p>
+    <p><input type="submit" value="Add" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>
