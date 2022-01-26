@@ -2,11 +2,11 @@ package gr.ds.restapi.controller;
 
 
 import gr.ds.restapi.dao.EntityDAO;
-import gr.ds.restapi.dao.UserRepository;
 import gr.ds.restapi.entity.*;
 import gr.ds.restapi.services.CitizenService;
 import gr.ds.restapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +33,20 @@ public class AdminController {
     static EntityDAO<CivicOfficial> civicDAO;
 
     @Autowired
+    EntityDAO<User> userDAO;
+
+    @Autowired
     UserService userService;
 
 
+    @GetMapping("/{username}")
+    public String getUser(@PathVariable String username, Model model){
+        User user = userService.getUserByUsername(username);
+        System.out.println(user.getId() + "\t" + user.getFullName());
+        model.addAttribute("user", user);
+
+        return "user-info";
+    }
 
     @GetMapping("/{usertype}/all")
     public String listCitizens(@PathVariable String usertype, Model model){
@@ -46,28 +57,50 @@ public class AdminController {
             case "citizens":
                 List<Citizen> citizens = citizenDAO.showALl();
                 model.addAttribute("citizens", citizens);
-                break;
+                return "list-citizens";
+
             case "vets":
                 List<Vet> vets = vetDAO.showALl();
-                model.addAttribute("citizens", vets);
-                break;
+                model.addAttribute("vets", vets);
+                return "list-vets";
 
-            case "civis":
-                List<CivicOfficial> civis = civicDAO.showALl();
-                model.addAttribute("citizens", civis);
+            case "civics":
+                List<CivicOfficial> civics = civicDAO.showALl();
+                model.addAttribute("citizens", civics);
                 break;
             default:
                 break;
         }
-
-        return "list-citizens";
+            return "";
 
     }
 
+    //User section
+
+    //DELETE USER
     @GetMapping("/delete/{username}")
     public String deleteUser(@PathVariable String username){
 
         userService.deleteUserByUsername(username);
+        return "success-form";
+    }
+
+    //UPDATE USER
+    @GetMapping("/update/{username}")
+    public String updateUser(@PathVariable String username, Model model){
+
+        User user = userService.getUserByUsername(username);
+        System.out.println(user.getRoles());
+        model.addAttribute("user", user);
+
+        return "user-update-form";
+    }
+
+    @PostMapping("/update/{username}")
+    public String updateUserSubmit(@ModelAttribute User user){ //TODO add roles to add citizen and update citizen
+
+        userDAO.updateEntity(user);
+
         return "success-form";
     }
 
@@ -107,7 +140,7 @@ public class AdminController {
     @PostMapping("/update-citizen/{code}")
     public String updateCitizenSubmit(@ModelAttribute Citizen citizen){ //TODO add roles to add citizen and update citizen
 
-        citizen.addRole(new Role("ROLE_CITIZEN"));
+        //citizen.addRole(new Role("ROLE_CITIZEN")); //TODO thats why roles is not updating
         citizenDAO.updateEntity(citizen);
 
         return "success-form";

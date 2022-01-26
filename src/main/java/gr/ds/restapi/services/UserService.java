@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,15 +23,20 @@ public class UserService implements UserRepository {
     UserRepository userRepository;
 
     @Override
-    public void deleteUserByUsername(String username) {
+    public void deleteUserByUsername(String username) throws UsernameNotFoundException {
 
         userRepository.deleteUserByUsername(username);
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.getUserByUsername(username);
 
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="container">
+  <div id="content">
+    <!--  add our html table here -->
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Full Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+      </tr>
+
+      <tr th:each="citizen, stat: ${citizens}">
+        <form action="#" th:action="@{/api/root/users/update-citizen/{code}(code = ${citizen.code})}" th:object="${citizen}" method="get">
+        <td th:text="${citizen.id}"></td>
+        <td th:text="${citizen.code}"></td>
+        <td th:text="${citizen.fullName}"></td>
+        <td th:text="${citizen.address}"></td>
+        <td th:text="${citizen.phoneNumber}"></td>
+        <td th:text="${citizen.email}"></td>
+        <td><input type="submit" value="Update" /></td>
+        </form>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

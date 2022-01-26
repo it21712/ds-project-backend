@@ -7,7 +7,7 @@
 <body>
 <h1>Citizen Data</h1>
 <form action="#" th:action="@{/api/root/users/update-citizen/{code}(code = citizen.code)}" th:object="${citizen}" method="post">
-    <p>Id: <textarea th:field="${citizen.id}" th:value="${citizen.getId()}"/></p>
+    <p hidden>Id: <textarea th:field="${citizen.id}" th:value="${citizen.getId()}"/></p>
     <p>Code: <input type="number" th:field="${citizen.code}" th:value="${citizen.getCode()}"/></p>
     <p>Username: <input type="text" th:field="${citizen.username}" th:value="${citizen.getUsername()}"/></p>
     <p>Passcode: <input type="text" th:field="${citizen.passcode}" th:value="${citizen.getPasscode()}"/></p>
