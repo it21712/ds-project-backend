@@ -3,6 +3,7 @@ package gr.ds.restapi.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -45,6 +46,20 @@ public class Citizen extends User {
         this.setUsername(username);
         this.setPasscode(passCode);
         this.setEnabled(enabled);
+    }
+
+    public Citizen(int id, int code, String username, String passCode, String fullName, String region, String address, int phoneNumber, String email, boolean enabled, Set<Role> roles){
+        this.code = code;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.setId(id);
+        this.setRegion(region);
+        this.setFullName(fullName);
+        this.setUsername(username);
+        this.setPasscode(passCode);
+        this.setEnabled(enabled);
+        this.setRoles(roles);
     }
 
     public Citizen(String fullName, String region, String address, int phoneNumber){

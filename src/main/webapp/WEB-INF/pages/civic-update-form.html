@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Civic Official</title>
+</head>
+<body>
+<h1>Civic Official Data</h1>
+<form action="#" th:action="@{/api/root/users/update-civic/{code}(code = civic.code)}" th:object="${civic}" method="post">
+    <p hidden>Id: <textarea th:field="${civic.id}" th:value="${civic.getId()}"/></p>
+    <p hidden>Code: <input type="number" th:field="${civic.code}" th:value="${civic.getCode()}"/></p>
+    <p>Username: <input type="text" th:field="${civic.username}" th:value="${civic.getUsername()}"/></p>
+    <p>Passcode: <input type="text" th:field="${civic.passcode}" th:value="${civic.getPasscode()}"/></p>
+    <p>Full Name: <input type="text" th:field="${civic.fullName}" th:value="${civic.getFullName()}"/></p>
+    <p>Region: <input type="text" th:field="${civic.region}" th:value="${civic.getRegion()}"/></p>
+    <p>Enabled: <input type="checkbox" th:field="${civic.enabled}" th:value="${civic.getEnabled()}"/></p>
+    <p><input type="submit" value="Update" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

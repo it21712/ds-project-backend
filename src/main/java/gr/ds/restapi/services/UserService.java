@@ -24,7 +24,8 @@ public class UserService implements UserRepository {
 
     @Override
     public void deleteUserByUsername(String username) throws UsernameNotFoundException {
-
+        User user = userRepository.findByUsername(username);
+        user.removeRoles();
         userRepository.deleteUserByUsername(username);
     }
 
@@ -91,7 +92,7 @@ public class UserService implements UserRepository {
 
     @Override
     public <S extends User> S save(S entity) {
-        return null;
+        return userRepository.save(entity);
     }
 
     @Override
@@ -146,7 +147,7 @@ public class UserService implements UserRepository {
 
     @Override
     public User getById(Integer integer) {
-        return null;
+       return userRepository.getById(integer);
     }
 
     @Override

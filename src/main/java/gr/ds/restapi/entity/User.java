@@ -28,18 +28,33 @@ public class User {
     private boolean enabled;
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    /*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "user")
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
+
     )
+    private Set<Role> roles = new HashSet<>();*/
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Role> roles = new HashSet<>();
+
+
 
     public void addRole(Role role) {
         roles.add(role);
     }
     public void removeRole(Role role){roles.remove(role);}
+
+    public void removeRoles(){
+        for (Role r: roles
+             ) {
+            roles.remove(r);
+        }
+    }
+
+
     public User(){}
 
     public User(int id, String username, String passcode, String fullName, String region, boolean enabled) {
@@ -107,7 +122,9 @@ public class User {
     }
 
     public Set<Role> getRoles() {
-        return roles;
+        return this.roles;
     }
+
+    public void setRoles(Set<Role> roles){this.roles=roles;}
 
 }

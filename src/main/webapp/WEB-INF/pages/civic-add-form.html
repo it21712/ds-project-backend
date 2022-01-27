@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new Civic Official</title>
+</head>
+<body>
+<h1>Civic Official Data</h1>
+<form action="#" th:action="@{/api/root/users/add-civic}" th:object="${civic}" method="post">
+    <p>Code: <input type="number" th:field="${civic.code}" /></p>
+    <p>Username: <input type="text" th:field="${civic.username}" /></p>
+    <p>Passcode: <input type="text" th:field="${civic.passcode}" /></p>
+    <p>Full Name: <input type="text" th:field="${civic.fullName}" /></p>
+    <p>Region: <input type="text" th:field="${civic.region}" /></p>
+    <p>Enabled: <input type="checkbox" th:field="${civic.enabled}" checked="0"/></p>
+    <p><input type="submit" value="Add" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

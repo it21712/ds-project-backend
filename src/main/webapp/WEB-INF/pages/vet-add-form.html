@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new vet</title>
+</head>
+<body>
+<h1>Vet Data</h1>
+<form action="#" th:action="@{/api/root/users/add-vet}" th:object="${vet}" method="post">
+    <p>Code: <input type="number" th:field="${vet.code}" /></p>
+    <p>Username: <input type="text" th:field="${vet.username}" /></p>
+    <p>Passcode: <input type="text" th:field="${vet.passcode}" /></p>
+    <p>Full Name: <input type="text" th:field="${vet.fullName}" /></p>
+    <p>Region: <input type="text" th:field="${vet.region}" /></p>
+    <p>Veterinary Name: <input type="text" th:field="${vet.name}" /></p>
+    <p>Enabled: <input type="checkbox" th:field="${vet.enabled}" checked="0"/></p>
+    <p><input type="submit" value="Add" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

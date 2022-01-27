@@ -1,7 +1,7 @@
 package gr.ds.restapi.services;
 
-import gr.ds.restapi.dao.CitizenRepository;
-import gr.ds.restapi.entity.Citizen;
+import gr.ds.restapi.dao.RoleRepository;
+import gr.ds.restapi.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -15,29 +15,28 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service
-public class CitizenService implements CitizenRepository {
+public class RoleService implements RoleRepository {
 
     @Autowired
-    CitizenRepository citizenRepository;
-
+    RoleRepository roleRepository;
 
     @Override
-    public List<Citizen> findAll() {
+    public List<Role> findAll() {
         return null;
     }
 
     @Override
-    public List<Citizen> findAll(Sort sort) {
+    public List<Role> findAll(Sort sort) {
         return null;
     }
 
     @Override
-    public Page<Citizen> findAll(Pageable pageable) {
+    public Page<Role> findAll(Pageable pageable) {
         return null;
     }
 
     @Override
-    public List<Citizen> findAllById(Iterable<Integer> integers) {
+    public List<Role> findAllById(Iterable<Integer> integers) {
         return null;
     }
 
@@ -51,8 +50,10 @@ public class CitizenService implements CitizenRepository {
 
     }
 
+
+
     @Override
-    public void delete(Citizen entity) {
+    public void delete(Role entity) {
 
     }
 
@@ -62,7 +63,7 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Citizen> entities) {
+    public void deleteAll(Iterable<? extends Role> entities) {
 
     }
 
@@ -72,17 +73,17 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public <S extends Citizen> S save(S entity) {
-        return citizenRepository.save(entity);
-    }
-
-    @Override
-    public <S extends Citizen> List<S> saveAll(Iterable<S> entities) {
+    public <S extends Role> S save(S entity) {
         return null;
     }
 
     @Override
-    public Optional<Citizen> findById(Integer integer) {
+    public <S extends Role> List<S> saveAll(Iterable<S> entities) {
+        return null;
+    }
+
+    @Override
+    public Optional<Role> findById(Integer integer) {
         return Optional.empty();
     }
 
@@ -97,17 +98,17 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public <S extends Citizen> S saveAndFlush(S entity) {
+    public <S extends Role> S saveAndFlush(S entity) {
         return null;
     }
 
     @Override
-    public <S extends Citizen> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends Role> List<S> saveAllAndFlush(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<Citizen> entities) {
+    public void deleteAllInBatch(Iterable<Role> entities) {
 
     }
 
@@ -122,57 +123,63 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public Citizen getOne(Integer integer) {
-        return  null;
+    public Role getOne(Integer integer) {
+        return null;
     }
 
     @Override
-    public Citizen getById(Integer integer) {
-        return  null;
+    public Role getById(Integer integer) {
+        return null;
     }
 
     @Override
-    public <S extends Citizen> Optional<S> findOne(Example<S> example) {
+    public <S extends Role> Optional<S> findOne(Example<S> example) {
         return Optional.empty();
     }
 
     @Override
-    public <S extends Citizen> List<S> findAll(Example<S> example) {
+    public <S extends Role> List<S> findAll(Example<S> example) {
         return null;
     }
 
     @Override
-    public <S extends Citizen> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends Role> List<S> findAll(Example<S> example, Sort sort) {
         return null;
     }
 
     @Override
-    public <S extends Citizen> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends Role> Page<S> findAll(Example<S> example, Pageable pageable) {
         return null;
     }
 
     @Override
-    public <S extends Citizen> long count(Example<S> example) {
+    public <S extends Role> long count(Example<S> example) {
         return 0;
     }
 
     @Override
-    public <S extends Citizen> boolean exists(Example<S> example) {
+    public <S extends Role> boolean exists(Example<S> example) {
         return false;
     }
 
     @Override
-    public <S extends Citizen, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends Role, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return null;
     }
 
     @Override
-    public Citizen getFullCitizenByCode(int code) {
-        return citizenRepository.getFullCitizenByCode(code);
+    public void deleteByUserId(Integer integer) {
+        List<Role> roles = roleRepository.findByUserId(integer);
+        for (Role r:roles
+             ) {
+            r.removeUser();
+            roleRepository.deleteById(r.getId());
+        }
+
     }
 
     @Override
-    public Citizen getCitizenByCode(int code) {
-        return citizenRepository.getCitizenByCode(code);
+    public List<Role> findByUserId(Integer integer) {
+        return roleRepository.findByUserId(integer);
     }
 }

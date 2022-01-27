@@ -26,14 +26,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery(credStringQuery)
-                .authoritiesByUsernameQuery(authStringQuery);
+                .usersByUsernameQuery("select u.username, u.passcode, u.enabled from user u where u.username = ?")
+                .authoritiesByUsernameQuery("select u.username, r.name from user u join role r on u.user_id = r.user_id where username = ?");
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic().and().authorizeRequests()
-                .antMatchers("/api").hasRole("ADMIN")
+                .antMatchers("/api/").hasRole("ADMIN")
                 .antMatchers("/citizen/**").hasRole("USER")
                 .and()
                 .exceptionHandling().accessDeniedPage("/welcome/error")

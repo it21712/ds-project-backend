@@ -1,7 +1,9 @@
 package gr.ds.restapi.dao;
 
+import gr.ds.restapi.entity.Citizen;
 import gr.ds.restapi.entity.CivicOfficial;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -17,11 +19,24 @@ public class CivicDAOImpl implements EntityDAO<CivicOfficial> {
 
     @Override
     public List<CivicOfficial> showALl() {
-        return null;
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<CivicOfficial> civicOfficialQuery = session.createQuery("SELECT c FROM CivicOfficial c", CivicOfficial.class);
+
+        session.close();
+
+        List<CivicOfficial> civicOfficials = civicOfficialQuery.getResultList();
+
+        return civicOfficials;
     }
 
     @Override
+    @Transactional
     public int addEntity(CivicOfficial user) {
+        Session session = entityManager.unwrap(Session.class);
+
+        session.save(user);
+        session.close();
         return 0;
     }
 

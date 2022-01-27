@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Vet</title>
+</head>
+<body>
+<h1>Vet Data</h1>
+<form action="#" th:action="@{/api/root/users/update-vet/{code}(code = vet.code)}" th:object="${vet}" method="post">
+    <p hidden>Id: <textarea th:field="${vet.id}" th:value="${vet.getId()}"/></p>
+    <p hidden>Code: <input type="number" th:field="${vet.code}" th:value="${vet.getCode()}"/></p>
+    <p>Username: <input type="text" th:field="${vet.username}" th:value="${vet.getUsername()}"/></p>
+    <p>Passcode: <input type="text" th:field="${vet.passcode}" th:value="${vet.getPasscode()}"/></p>
+    <p>Full Name: <input type="text" th:field="${vet.fullName}" th:value="${vet.getFullName()}"/></p>
+    <p>Veterinary Name: <input type="text" th:field="${vet.name}" th:value="${vet.getName()}"/></p>
+    <p>Region: <input type="text" th:field="${vet.region}" th:value="${vet.getRegion()}"/></p>
+    <p>Enabled: <input type="checkbox" th:field="${vet.enabled}" th:value="${vet.getEnabled()}"/></p>
+    <p><input type="submit" value="Update" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

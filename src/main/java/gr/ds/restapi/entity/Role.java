@@ -16,7 +16,17 @@ public class Role {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private int userId;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
+
+
+    public void removeUser(){
+        this.user = null;
+    }
 
     public Role() { }
 
@@ -28,6 +38,11 @@ public class Role {
     public Role(int id, String name){
         this.id=id;
         this.name=name;
+    }
+    public Role(String name, User user){
+        this.id=id;
+        this.name=name;
+        this.user = user;
     }
 
     public int getId() {
@@ -46,7 +61,13 @@ public class Role {
         this.name = name;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {

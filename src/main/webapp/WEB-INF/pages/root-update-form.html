@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Root</title>
+</head>
+<body>
+<h1>Root Data</h1>
+<form action="#" th:action="@{/api/root/users/update-root/{id}(id = root.id)}" th:object="${root}" method="post">
+    <p hidden>Id: <textarea th:field="${civic.id}" th:value="${root.getId()}"/></p>
+    <p>Username: <input type="text" th:field="${root.username}" th:value="${root.getUsername()}"/></p>
+    <p>Passcode: <input type="text" th:field="${root.passcode}" th:value="${root.getPasscode()}"/></p>
+    <p>Full Name: <input type="text" th:field="${root.fullName}" th:value="${root.getFullName()}"/></p>
+    <p>Region: <input type="text" th:field="${root.region}" th:value="${root.getRegion()}"/></p>
+    <p>Enabled: <input type="checkbox" th:field="${root.enabled}" th:value="${root.getEnabled()}"/></p>
+    <p><input type="submit" value="Update" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

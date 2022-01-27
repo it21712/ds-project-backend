@@ -1,7 +1,7 @@
 package gr.ds.restapi.services;
 
-import gr.ds.restapi.dao.CitizenRepository;
-import gr.ds.restapi.entity.Citizen;
+import gr.ds.restapi.dao.CivicRepository;
+import gr.ds.restapi.entity.CivicOfficial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -15,29 +15,29 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service
-public class CitizenService implements CitizenRepository {
+public class CivicService implements CivicRepository {
 
     @Autowired
-    CitizenRepository citizenRepository;
+    CivicRepository civicRepository;
 
 
     @Override
-    public List<Citizen> findAll() {
+    public List<CivicOfficial> findAll() {
         return null;
     }
 
     @Override
-    public List<Citizen> findAll(Sort sort) {
+    public List<CivicOfficial> findAll(Sort sort) {
         return null;
     }
 
     @Override
-    public Page<Citizen> findAll(Pageable pageable) {
+    public Page<CivicOfficial> findAll(Pageable pageable) {
         return null;
     }
 
     @Override
-    public List<Citizen> findAllById(Iterable<Integer> integers) {
+    public List<CivicOfficial> findAllById(Iterable<Integer> integers) {
         return null;
     }
 
@@ -52,7 +52,7 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public void delete(Citizen entity) {
+    public void delete(CivicOfficial entity) {
 
     }
 
@@ -62,7 +62,7 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Citizen> entities) {
+    public void deleteAll(Iterable<? extends CivicOfficial> entities) {
 
     }
 
@@ -72,17 +72,17 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public <S extends Citizen> S save(S entity) {
-        return citizenRepository.save(entity);
+    public <S extends CivicOfficial> S save(S entity) {
+        return civicRepository.save(entity);
     }
 
     @Override
-    public <S extends Citizen> List<S> saveAll(Iterable<S> entities) {
+    public <S extends CivicOfficial> List<S> saveAll(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public Optional<Citizen> findById(Integer integer) {
+    public Optional<CivicOfficial> findById(Integer integer) {
         return Optional.empty();
     }
 
@@ -97,17 +97,17 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public <S extends Citizen> S saveAndFlush(S entity) {
+    public <S extends CivicOfficial> S saveAndFlush(S entity) {
         return null;
     }
 
     @Override
-    public <S extends Citizen> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends CivicOfficial> List<S> saveAllAndFlush(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<Citizen> entities) {
+    public void deleteAllInBatch(Iterable<CivicOfficial> entities) {
 
     }
 
@@ -122,57 +122,52 @@ public class CitizenService implements CitizenRepository {
     }
 
     @Override
-    public Citizen getOne(Integer integer) {
-        return  null;
+    public CivicOfficial getOne(Integer integer) {
+        return null;
     }
 
     @Override
-    public Citizen getById(Integer integer) {
-        return  null;
+    public CivicOfficial getById(Integer integer) {
+        return null;
     }
 
     @Override
-    public <S extends Citizen> Optional<S> findOne(Example<S> example) {
+    public <S extends CivicOfficial> Optional<S> findOne(Example<S> example) {
         return Optional.empty();
     }
 
     @Override
-    public <S extends Citizen> List<S> findAll(Example<S> example) {
+    public <S extends CivicOfficial> List<S> findAll(Example<S> example) {
         return null;
     }
 
     @Override
-    public <S extends Citizen> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends CivicOfficial> List<S> findAll(Example<S> example, Sort sort) {
         return null;
     }
 
     @Override
-    public <S extends Citizen> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends CivicOfficial> Page<S> findAll(Example<S> example, Pageable pageable) {
         return null;
     }
 
     @Override
-    public <S extends Citizen> long count(Example<S> example) {
+    public <S extends CivicOfficial> long count(Example<S> example) {
         return 0;
     }
 
     @Override
-    public <S extends Citizen> boolean exists(Example<S> example) {
+    public <S extends CivicOfficial> boolean exists(Example<S> example) {
         return false;
     }
 
     @Override
-    public <S extends Citizen, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends CivicOfficial, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return null;
     }
 
     @Override
-    public Citizen getFullCitizenByCode(int code) {
-        return citizenRepository.getFullCitizenByCode(code);
-    }
-
-    @Override
-    public Citizen getCitizenByCode(int code) {
-        return citizenRepository.getCitizenByCode(code);
+    public CivicOfficial getCivicOfficialByCode(Integer code) {
+        return civicRepository.getCivicOfficialByCode(code);
     }
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Civic Officials List</title>
+</head>
+<body>
+<div id="container">
+    <div id="content">
+        <!--  add our html table here -->
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Passcode</th>
+                <th>Code</th>
+            </tr>
+
+            <tr th:each="civic, stat: ${civics}">
+                <form action="#"  th:object="${civic}" method="get">
+                    <td th:text="${civic.id}"></td>
+                    <td th:text="${civic.username}"></td>
+                    <td th:text="${civic.passcode}"></td>
+                    <td th:text="${civic.code}"></td>
+                    <td><input type="submit" value="Update" th:formaction="'/api/root/users/update-civic/' + ${civic.code}" /></td>
+                    <td><input type="submit" value="Delete" th:formaction="'/api/root/users/delete/' + ${civic.username}" /></td>
+                </form>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

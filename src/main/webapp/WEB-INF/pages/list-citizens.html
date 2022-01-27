@@ -12,6 +12,8 @@
     <table>
       <tr>
         <th>Id</th>
+        <th>Username</th>
+        <th>Passcode</th>
         <th>Code</th>
         <th>Full Name</th>
         <th>Address</th>
@@ -20,14 +22,17 @@
       </tr>
 
       <tr th:each="citizen, stat: ${citizens}">
-        <form action="#" th:action="@{/api/root/users/update-citizen/{code}(code = ${citizen.code})}" th:object="${citizen}" method="get">
-        <td th:text="${citizen.id}"></td>
-        <td th:text="${citizen.code}"></td>
-        <td th:text="${citizen.fullName}"></td>
-        <td th:text="${citizen.address}"></td>
-        <td th:text="${citizen.phoneNumber}"></td>
-        <td th:text="${citizen.email}"></td>
-        <td><input type="submit" value="Update" /></td>
+        <form action="#" th:object="${citizen}" method="get">
+          <td><span th:text="${citizen.id}">ID</span></td>
+          <td th:text="${citizen.username}"></td>
+          <td th:text="${citizen.passcode}"></td>
+          <td th:text="${citizen.code}"></td>
+          <td th:text="${citizen.fullName}"></td>
+          <td th:text="${citizen.address}"></td>
+          <td th:text="${citizen.phoneNumber}"></td>
+          <td th:text="${citizen.email}"></td>
+          <td><input type="submit" value="Update" th:formaction="'/api/root/users/update-citizen/' + ${citizen.code}" /></td>
+          <td><input type="submit" value="Delete" th:formaction="'/api/root/users/delete/' + ${citizen.username}" /></td>
         </form>
       </tr>
 

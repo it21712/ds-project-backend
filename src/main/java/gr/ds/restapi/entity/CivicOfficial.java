@@ -8,7 +8,10 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name = "id")
 public class CivicOfficial extends User{
 
-    protected CivicOfficial(){}
+    @Column(name="code")
+    private int code;
+
+    public CivicOfficial(){}
 
 
 
@@ -24,5 +27,13 @@ public class CivicOfficial extends User{
     public CivicOfficial(String fullName, String region){
         this.setFullName(fullName);
         this.setRegion(region);
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }
