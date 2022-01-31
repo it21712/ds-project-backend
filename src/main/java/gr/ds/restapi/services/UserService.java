@@ -42,7 +42,7 @@ public class UserService implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override

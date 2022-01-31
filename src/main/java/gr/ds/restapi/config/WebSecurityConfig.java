@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().accessDeniedPage("/welcome/error")
                 .and().csrf().disable().headers().frameOptions().disable()
-                .and().formLogin().permitAll().defaultSuccessUrl("/home")
+                .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
                 .and().logout().permitAll();
     }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
     <meta charset="UTF-8">
     <title></title>
 </head>
@@ -17,6 +17,7 @@
                 <th>Full Name</th>
                 <th>Region</th>
                 <th>Enabled</th>
+                <th>Actions</th>
 
             </tr>
 
@@ -28,9 +29,10 @@
                 <td th:text = "${user.fullName}" ></td>
                 <td th:text = "${user.region}" ></td>
                 <td th:text = "${user.enabled}" ></td>
-                <!--<td><input type="submit" value="Update" th:formaction=""/></td>-->
-                <td><input type="submit" value="Delete" th:formaction="'/api/root/users/delete/' + ${user.username}"/></td>
-                <td><input type="submit" value="Update" th:formaction="'/api/root/users/update/' + ${user.username}"/></td>
+                <td>
+                    <input class="table-button" type="submit" value="Update" th:formaction="'/api/root/users/update/' + ${user.username}"/>
+                    <input class="table-button" type="submit" value="Delete" th:formaction="'/api/root/users/delete/' + ${user.username}"/>
+                </td>
 
                 </form>
             </tr>

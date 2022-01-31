@@ -32,6 +32,12 @@ public class AdminController {
     @Autowired
     EntityDAO<CivicOfficial> civicDAO;
 
+    @GetMapping("/all")
+    public String getUsers(Model model){
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
+        return "list-users";
+    }
 
     @GetMapping("/{username}")
     public String getUser(@PathVariable String username, Model model){

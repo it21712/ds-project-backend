@@ -11,9 +11,22 @@ public class AdminHomeController {
 
 
     @GetMapping("/home")
-    public String adminHome(Model model){
+    public String adminHome(){
+        return "admin-pages/admin-home-page";
+    }
 
-        return "admin-home-page";
+    @GetMapping("/home/citizens")
+    public String citizenHome(){
+        return "admin-pages/admin-citizen-page";
+    }
 
+    @GetMapping("/home/vets")
+    public String vetHome(){
+        return "admin-pages/admin-vet-page";
+    }
+
+    @GetMapping("/home/civics")
+    public String civicHome(){
+        return "admin-pages/admin-civic-page";
     }
 }
