@@ -10,7 +10,8 @@
 </head>
 <body>
 <div>
-    <div class="login-container">
+    <div id="form-box">
+    <!--<div class="login-container">-->
         <h2>Sign In</h2>
         <form th:action="@{/login}" method="post">
             <div>
@@ -30,7 +31,7 @@
 
         </form>
         <div class="text-center pb-4">
-            <p class="text-grey-dark text-sm">
+            <p hidden class="text-grey-dark text-sm">
                 Don't have an account? <a href="#" class="no-underline text-green-500 font-bold">Create an Account</a>.
             </p>
         </div>

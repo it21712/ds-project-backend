@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic().and().authorizeRequests()
-                .antMatchers("/api/").hasRole("ADMIN")
+                .antMatchers("/api/**").hasRole("ADMIN")
                 .antMatchers("/citizen/**").hasRole("USER")
                 .and()
                 .exceptionHandling().accessDeniedPage("/welcome/error")

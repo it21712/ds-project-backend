@@ -6,6 +6,15 @@
     <title>Title</title>
 </head>
 <body>
+
+<ul>
+    <li><a th:href="@{/api/root/home}">Home</a></li>
+    <li><a th:href="@{/api/root/home/citizens}">Citizens</a></li>
+    <li><a th:href="@{/api/root/home/vets}">Vets</a></li>
+    <li><a th:href="@{/api/root/home/civics}">Civics</a></li>
+    <li><a class="active" th:href="@{/api/root/home/users}">Users</a></li>
+</ul>
+
 <table>
     <tr>
         <th>Id</th>

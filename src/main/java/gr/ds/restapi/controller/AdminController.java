@@ -42,6 +42,10 @@ public class AdminController {
     @GetMapping("/{username}")
     public String getUser(@PathVariable String username, Model model){
         User user = userService.getUserByUsername(username);
+        if (user == null){
+            model.addAttribute("error", "User with username: " + username + " not found");
+            return "errors-page";
+        }
         System.out.println(user.getId() + "\t" + user.getFullName());
         model.addAttribute("user", user);
 
@@ -117,6 +121,13 @@ public class AdminController {
 
        userService.save(oldUser);
         return "success-form";
+    }
+
+    //Find user
+
+    @GetMapping("/find")
+    public String findUser(){
+        return "admin-pages/find-user-page";
     }
 
     //Citizen section

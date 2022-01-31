@@ -29,4 +29,7 @@ public class AdminHomeController {
     public String civicHome(){
         return "admin-pages/admin-civic-page";
     }
+
+    @GetMapping("/home/users")
+    public String userHome(){return "admin-pages/admin-user-page";}
 }

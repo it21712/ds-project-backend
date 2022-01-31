@@ -175,19 +175,20 @@ label{
 
 }
 
+.styled-text{
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 
 #center-div {
-    margin: auto;
-    width: 500px;
-    background-color: white;
 
-    border-radius: 14px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    /*overflow: hidden;*/
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 400px;
+    display: grid;
+    justify-content: space-evenly;
 }
 
 #form-box{

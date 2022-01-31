@@ -3,16 +3,16 @@
 <head>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <meta charset="UTF-8">
-    <title>Vet</title>
+    <title>User</title>
 </head>
 <body>
 
 <ul>
     <li><a th:href="@{/api/root/home}">Home</a></li>
     <li><a th:href="@{/api/root/home/citizens}">Citizens</a></li>
-    <li><a class="active" th:href="@{/api/root/home/vets}">Vets</a></li>
+    <li><a th:href="@{/api/root/home/vets}">Vets</a></li>
     <li><a th:href="@{/api/root/home/civics}">Civics</a></li>
-    <li><a th:href="@{/api/root/home/users}">Users</a></li>
+    <li><a class="active" th:href="@{/api/root/home/users}">Users</a></li>
 </ul>
 
 <div aria-orientation="vertical">
@@ -21,8 +21,8 @@
         <table>
             <tr>
                 <td>
-                    <input  type = "submit" value = "Add Vet" th:formaction = "'/api/root/users/add-vet'"/>
-                    <input type = "submit" value = "Show Vets" th:formaction = "'/api/root/users/vets/all'"/>
+                    <input  type = "submit" value = "Find User" th:formaction = "'/api/root/users/find'"/>
+                    <input type = "submit" value = "Show Users" th:formaction = "'/api/root/users/all'"/>
                 </td>
             </tr>
         </table>
