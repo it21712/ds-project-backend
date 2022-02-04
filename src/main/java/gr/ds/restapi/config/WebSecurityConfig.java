@@ -42,13 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.cors();
 
         httpSecurity.httpBasic().and().authorizeRequests()
-                .antMatchers("/api/**").hasRole("ADMIN")
+                .antMatchers("/api").hasRole("ADMIN")
                 .antMatchers("/citizen/**").hasRole("CITIZEN")
                 .and()
                 .exceptionHandling().accessDeniedPage("/welcome/error")
                 .and().csrf().disable().headers().frameOptions().disable()
                 .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
-                .and().logout().permitAll()/*.clearAuthentication(true).deleteCookies("JSESSIONID")
+                .and().logout().permitAll().deleteCookies("JSESSIONID").invalidateHttpSession(true)/*.clearAuthentication(true).deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)*/;
 
     }
