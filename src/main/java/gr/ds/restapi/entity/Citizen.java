@@ -116,5 +116,11 @@ public class Citizen extends User {
 
     public List<Pet> getPets(){ return pets; }
 
+    @Override
+    public String toString(){
+        return this.getId()+"\n"+this.getCode()+"\n"+this.getFullName()+"\n"+this.getUsername()
+                +"\n"+this.getPasscode()+"\n"+this.getPhoneNumber()+"\n"+this.getPets();
+    }
+
 
 }

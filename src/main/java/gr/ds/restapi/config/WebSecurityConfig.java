@@ -10,8 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -32,14 +38,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+        httpSecurity.cors();
+
         httpSecurity.httpBasic().and().authorizeRequests()
                 .antMatchers("/api/**").hasRole("ADMIN")
-                .antMatchers("/citizen/**").hasRole("USER")
+                .antMatchers("/citizen/**").hasRole("CITIZEN")
                 .and()
                 .exceptionHandling().accessDeniedPage("/welcome/error")
                 .and().csrf().disable().headers().frameOptions().disable()
                 .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
-                .and().logout().permitAll();
+                .and().logout().permitAll()/*.clearAuthentication(true).deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)*/;
+
     }
 
     @Override
@@ -52,5 +63,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        // Don't do this in production, use a proper list  of allowed origins
+        config.setAllowedOriginPatterns(Collections.singletonList("*"));
+        config.setAllowedHeaders(Arrays.asList("Authorization","Origin", "Content-Type", "Accept", "X-Custom-Header"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
+
 
 }

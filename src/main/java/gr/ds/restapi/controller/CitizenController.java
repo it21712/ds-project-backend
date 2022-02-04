@@ -41,7 +41,7 @@ public class CitizenController {
         String username = auth.getName();
 
         Citizen citizen = citizenDAO.getEntity(username);
-
+        
         String json = new Gson().toJson(citizen);
 
         return json;

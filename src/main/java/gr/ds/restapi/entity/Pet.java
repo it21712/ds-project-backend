@@ -17,7 +17,7 @@ public class Pet {
 
     @ManyToOne(optional = false)
     @JoinColumn(name ="owner_code", referencedColumnName = "id")
-    private Citizen citizen;
+    private Citizen citizen; //TODO make this transient
 
     @Column(name = "type")
     private String type;

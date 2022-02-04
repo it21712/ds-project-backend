@@ -88,7 +88,7 @@ public class CitizenDAOImpl implements EntityDAO<Citizen> {
 
         Citizen citizen = new Citizen(tmp.getFullName(), tmp.getRegion(), tmp.getAddress(), tmp.getPhoneNumber());
 
-        return tmp;
+        return citizen;
     }
 
 
