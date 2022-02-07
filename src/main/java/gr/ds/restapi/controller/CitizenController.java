@@ -92,7 +92,7 @@ public class CitizenController {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
-
+        System.out.println(username);
         List<Pet> pets = petService.getPendingPetsByCitizenName(username);
 
         String json = new Gson().toJson(pets);

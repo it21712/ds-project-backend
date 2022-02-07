@@ -1,5 +1,7 @@
 package gr.ds.restapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import gr.ds.restapi.dao.PetRepository;
 import gr.ds.restapi.dao.EntityDAO;
@@ -39,7 +41,7 @@ public class CivicController {
     }
 
     @GetMapping("/show-pets")
-    public String showPets(){
+    public String showPets() throws JsonProcessingException {
 
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
@@ -49,9 +51,8 @@ public class CivicController {
 
         List<Pet> pets = petRepository.getPetsByRegion(civic.getRegion());
 
-
-        String json = new Gson().toJson(pets);
-
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(pets);
         return json;
 
     }

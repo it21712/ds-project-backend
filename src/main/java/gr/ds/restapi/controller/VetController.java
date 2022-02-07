@@ -1,7 +1,9 @@
 package gr.ds.restapi.controller;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import gr.ds.restapi.dao.EntityDAO;
+import gr.ds.restapi.helper.HelperClasses;
 import gr.ds.restapi.entity.MedicalHistory;
 import gr.ds.restapi.entity.Pet;
 import gr.ds.restapi.entity.Vet;
@@ -28,33 +30,37 @@ public class VetController {
     PetService petService;
 
     @GetMapping("/home")
-    public String info(){
+    public String info() throws JsonProcessingException {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
         Vet vet = vetDAO.getEntity(username);
 
-
-        String json = new Gson().toJson(vet);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(vet);
 
         return json;
     }
 
     @PostMapping("/show-pending")
-    public String showPending(@RequestBody String citizenName){
+    public String showPending(@RequestBody HelperClasses.JSONString citizenNameJsonString) throws JsonProcessingException {
 
+        String citizenName = citizenNameJsonString.getString();
         List<Pet> pendingPets = petService.getPendingPetsByCitizenName(citizenName);
+        System.out.println(pendingPets.size());
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(pendingPets);
 
-        String json = new Gson().toJson(pendingPets);
 
         return json;
     }
 
     @PostMapping("/verify-pet")
-    public String verifyPet(@RequestBody String petSerialNum){
+    public String verifyPet(@RequestBody HelperClasses.JSONString petNumberJsonString) throws JsonProcessingException {
 
-        int serialNum = Integer.parseInt(petSerialNum);
+
+        int serialNum = Integer.parseInt(petNumberJsonString.getString());
 
         Pet pet = petService.getById(serialNum);
         System.out.println("pet pending: " + pet.getIs_approved());
@@ -64,7 +70,10 @@ public class VetController {
 
         Pet petResponse = new Pet(pet.getSerialNumber(), pet.getOwnerCode(), pet.getType(), pet.getRace(), pet.getSex(), pet.getBirthDate(), pet.getIs_approved());
 
-        return new Gson().toJson(petResponse, Pet.class);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(petResponse);
+
+        return json;
     }
 
 
