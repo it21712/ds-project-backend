@@ -86,9 +86,9 @@ public class CitizenDAOImpl implements EntityDAO<Citizen> {
 
         Citizen tmp = session.createQuery("SELECT c FROM Citizen c WHERE c.username = :username", Citizen.class).setParameter("username", username).getSingleResult();
 
-        Citizen citizen = new Citizen(tmp.getFullName(), tmp.getRegion(), tmp.getAddress(), tmp.getPhoneNumber());
+        //Citizen citizen = new Citizen(tmp.getFullName(), tmp.getRegion(), tmp.getAddress(), tmp.getPhoneNumber());
 
-        return citizen;
+        return tmp;
     }
 
 

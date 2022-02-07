@@ -1,5 +1,9 @@
 package gr.ds.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +13,7 @@ import java.util.Set;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class Citizen extends User {
+
 
     @Column(name = "code")
     private int code;
@@ -23,6 +28,7 @@ public class Citizen extends User {
     private String email;
 
     @OneToMany(mappedBy = "citizen", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("citizen")
     private List<Pet> pets = new ArrayList<>();
 
 

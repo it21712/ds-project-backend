@@ -1,11 +1,16 @@
 package gr.ds.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
+
 public class Pet {
 
     @Id
@@ -17,7 +22,8 @@ public class Pet {
 
     @ManyToOne(optional = false)
     @JoinColumn(name ="owner_code", referencedColumnName = "id")
-    private Citizen citizen; //TODO make this transient
+    @JsonIgnoreProperties("pets")
+    private Citizen citizen;
 
     @Column(name = "type")
     private String type;
@@ -34,7 +40,8 @@ public class Pet {
     @Column(name = "is_approved")
     private int is_approved;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("pet")
     private List<MedicalHistory> medicalOps = new ArrayList<>();
 
     protected Pet(){}
@@ -69,6 +76,15 @@ public class Pet {
         this.sex = sex;
         this.type = type;
         this.is_approved = is_approved;
+    }
+
+    public Pet(int serialNumber, String birthDate, String race, String sex, String type){
+        this.serialNumber = serialNumber;
+        this.birthDate = birthDate;
+        this.race = race;
+        this.sex = sex;
+        this.type = type;
+        is_approved = 0;
     }
 
     public Pet(int serialNumber, String birthDate, String race, String sex, String type, int is_approved, Citizen citizen){

@@ -1,5 +1,7 @@
 package gr.ds.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +23,7 @@ public class Role {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JsonIgnoreProperties("roles")
     private User user;
 
 

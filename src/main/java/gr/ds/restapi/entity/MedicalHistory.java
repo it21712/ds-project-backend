@@ -1,6 +1,8 @@
 package gr.ds.restapi.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,6 +21,7 @@ public class MedicalHistory {
 
     @ManyToOne
     @JoinColumn(name = "pet_number", referencedColumnName = "serial_number")
+    @JsonIgnoreProperties("medicalOps")
     private Pet pet;
 
     protected MedicalHistory(){}

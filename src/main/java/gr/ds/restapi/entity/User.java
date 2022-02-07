@@ -1,5 +1,9 @@
 package gr.ds.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -38,6 +42,7 @@ public class User {
     private Set<Role> roles = new HashSet<>();*/
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonIgnoreProperties("user")
     private Set<Role> roles = new HashSet<>();
 
 

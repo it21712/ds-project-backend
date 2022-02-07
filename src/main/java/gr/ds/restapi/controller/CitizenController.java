@@ -1,7 +1,12 @@
 package gr.ds.restapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 
+import com.google.gson.GsonBuilder;
 import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.Citizen;
 import gr.ds.restapi.entity.Pet;
@@ -34,15 +39,17 @@ public class CitizenController {
     PetService petService;
 
     @GetMapping("/home")
-    public String CitizenInfo(){
+    public String CitizenInfo() throws JsonProcessingException {
 
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
         Citizen citizen = citizenDAO.getEntity(username);
-        
-        String json = new Gson().toJson(citizen);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(citizen);
+
 
         return json;
     }
@@ -56,13 +63,14 @@ public class CitizenController {
 
         Citizen citizen = citizenDAO.getEntity(username);
         pet.setCitizen(citizen);
+        pet.setOwnerCode(citizen.getCode());
         citizen.addPet(pet);
         citizenDAO.updateEntity(citizen);
         return new ResponseEntity<>(pet.getSerialNumber(), HttpStatus.CREATED);
     }
 
     @GetMapping("/pets")
-    public String Pets(){
+    public String Pets() throws JsonProcessingException {
 
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
@@ -70,7 +78,9 @@ public class CitizenController {
 
         List<Pet> pets = petService.getPetsByCitizenName(username);
 
-        String json = new Gson().toJson(pets);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(pets);
+
 
         return json;
 

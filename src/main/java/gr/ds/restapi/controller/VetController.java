@@ -35,6 +35,7 @@ public class VetController {
 
         Vet vet = vetDAO.getEntity(username);
 
+
         String json = new Gson().toJson(vet);
 
         return json;
