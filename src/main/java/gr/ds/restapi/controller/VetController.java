@@ -51,7 +51,7 @@ public class VetController {
         System.out.println(pendingPets.size());
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(pendingPets);
-
+        System.out.println(json);
 
         return json;
     }
@@ -92,6 +92,21 @@ public class VetController {
         petDAO.updateEntity(pet);
 
         return medOp.getOperation();
+
+    }
+
+    @PostMapping("/get-pet")
+    public String getPet(@RequestBody HelperClasses.JSONString petNumberJSONString) throws JsonProcessingException {
+
+        int petNumber = Integer.parseInt(petNumberJSONString.getString());
+        Pet pet = petService.getById(petNumber);
+        System.out.println("Found pet: " + pet.getSerialNumber());
+
+        Pet petResponse = new Pet(pet.getSerialNumber(), pet.getType(), pet.getRace(), pet.getSex(), pet.getBirthDate(), pet.getIs_approved());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(petResponse);
+        return json;
 
     }
 

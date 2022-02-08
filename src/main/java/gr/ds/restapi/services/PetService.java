@@ -1,7 +1,6 @@
 package gr.ds.restapi.services;
 
 import gr.ds.restapi.dao.PetRepository;
-import gr.ds.restapi.entity.MedicalHistory;
 import gr.ds.restapi.entity.Pet;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -36,9 +34,15 @@ public class PetService implements PetRepository {
     }
 
     @Override
-    public List<Pet> getPendingPetsByCitizenName(String username) {
+    public List<Pet> getPendingPetsByUserName(String username) {
 
-        List<Pet> pets  = petRepository.getPendingPetsByCitizenName(username);
+        List<Pet> pets  = petRepository.getPendingPetsByUserName(username);
+        return pets;
+    }
+
+    @Override
+    public List<Pet> getPendingPetsByCitizenName(String citizenName) {
+        List<Pet> pets  = petRepository.getPendingPetsByCitizenName(citizenName);
         return pets;
     }
 

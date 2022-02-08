@@ -2,11 +2,8 @@ package gr.ds.restapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 
-import com.google.gson.GsonBuilder;
 import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.Citizen;
 import gr.ds.restapi.entity.Pet;
@@ -93,7 +90,7 @@ public class CitizenController {
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
         System.out.println(username);
-        List<Pet> pets = petService.getPendingPetsByCitizenName(username);
+        List<Pet> pets = petService.getPendingPetsByUserName(username);
 
         String json = new Gson().toJson(pets);
 
