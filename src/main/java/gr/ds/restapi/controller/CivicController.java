@@ -28,14 +28,15 @@ public class CivicController {
     PetRepository petRepository;
 
     @GetMapping("/home")
-    public String info(){
+    public String info() throws JsonProcessingException {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
         CivicOfficial civic = civicDAO.getEntity(username);
 
-        String json = new Gson().toJson(civic);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(civic);
 
         return json;
     }

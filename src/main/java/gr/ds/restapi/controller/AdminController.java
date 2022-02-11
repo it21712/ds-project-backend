@@ -9,6 +9,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -147,6 +148,7 @@ public class AdminController {
     public String addCitizenSubmit(@ModelAttribute Citizen citizen){
 
         System.out.println("id: "+citizen.getId());
+        citizen.setPasscode(new BCryptPasswordEncoder().encode(citizen.getPasscode()));
         citizen.addRole(new Role("ROLE_CITIZEN", citizen));
         citizenDAO.addEntity(citizen);
 
@@ -196,6 +198,8 @@ public class AdminController {
     @PostMapping("/add-vet")
     public String addVetSubmit(@ModelAttribute Vet vet){
 
+        vet.setPasscode(new BCryptPasswordEncoder().encode(vet.getPasscode()));
+
         vet.addRole(new Role("ROLE_VET", vet));
         vetDAO.addEntity(vet);
 
@@ -242,6 +246,7 @@ public class AdminController {
     @PostMapping("/add-civic")
     public String addCivicSubmit(@ModelAttribute CivicOfficial civic){
 
+        civic.setPasscode(new BCryptPasswordEncoder().encode(civic.getPasscode()));
         civic.addRole(new Role("ROLE_CIVIC", civic));
         civicDAO.addEntity(civic);
 
@@ -281,20 +286,6 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @GetMapping("/add-root")
-    public String addRoot(Model model){
-        model.addAttribute("root", new Admin());
-        return "root-add-form";
-    }
-
-    @PostMapping("/add-root")
-    public String addRootSubmit(@ModelAttribute Admin admin){
-
-        admin.addRole(new Role("ROLE_ADMIN", admin));
-        adminDAO.addEntity(admin);
-
-        return "success-form";
-    }
 
     @GetMapping("/update-root/{id}")
     public String updateRoot(@PathVariable int id, Model model){
@@ -320,6 +311,8 @@ public class AdminController {
 
         return "success-form";
     }
+
+
 
 }
 

@@ -1,6 +1,7 @@
 package gr.ds.restapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.util.*;
@@ -15,12 +16,15 @@ public class User {
     private int id;
 
     @Column(name = "username", unique = true)
+    @NonNull
     private String username;
 
     @Column(name = "passcode")
+    @NonNull
     private String passcode;
 
     @Column(name = "full_name")
+    @NonNull
     private String fullName;
 
     @Column(name = "region")

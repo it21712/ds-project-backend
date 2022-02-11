@@ -1,5 +1,6 @@
 package gr.ds.restapi.dao;
 
+import gr.ds.restapi.entity.Admin;
 import gr.ds.restapi.entity.User;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -42,7 +43,9 @@ public class AdminDAOImpl implements EntityDAO {
     }
 
     @Override
-    public User getEntity(String username) {
-        return null;
+    public Admin getEntity(String username) {
+        Session session = entityManager.unwrap(Session.class);
+        Admin admin = session.createQuery("select a from Admin a where a.username= :username", Admin.class).setParameter("username", username).getSingleResult();
+        return admin;
     }
 }

@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.cors();
 
         httpSecurity.httpBasic().and().authorizeRequests()
-                .antMatchers("/api").hasRole("ADMIN")
+                .antMatchers("/api/**").hasRole("ADMIN")
                 .antMatchers("/citizen/**").hasRole("CITIZEN")
                 .and()
                 .exceptionHandling().accessDeniedPage("/welcome/error")
