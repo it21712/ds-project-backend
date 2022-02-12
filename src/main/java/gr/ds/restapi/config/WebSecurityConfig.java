@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().accessDeniedPage("/welcome/error")
                 .and().csrf().disable().headers().frameOptions().disable()
-                .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
+                .and().formLogin().loginPage("/login").permitAll()
                 .and().logout().permitAll().deleteCookies("JSESSIONID").invalidateHttpSession(true)/*.clearAuthentication(true).deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)*/;
 
@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         config.setAllowCredentials(true);
         // Don't do this in production, use a proper list  of allowed origins
         config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:3000"));
-        config.setAllowedHeaders(Arrays.asList("Authorization","Origin", "Content-Type", "Accept", "X-Custom-Header"));
+        config.setAllowedHeaders(Arrays.asList("Authorization","Origin", "Content-Type", "Accept", "X-Custom-Header", "X-Requested-With"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);

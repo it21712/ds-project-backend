@@ -54,6 +54,7 @@ public class CivicController {
 
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(pets);
+        System.out.println(json);
         return json;
 
     }
