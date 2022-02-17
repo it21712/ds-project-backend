@@ -3,6 +3,7 @@ package gr.ds.restapi.config;
 import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.Admin;
 import gr.ds.restapi.entity.Role;
+import gr.ds.restapi.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -18,12 +19,24 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     EntityDAO<Admin> adminDAO;
 
+    @Autowired
+    AdminService adminService;
+
     public void createAdminIfNotExists(){
 
-        if(adminDAO.getEntity("root0") != null) {
+        /*if(adminDAO.getEntity("root0") != null) {
             System.out.println("admin already exists");
             return;
         }
+        Admin admin = new Admin(1, "root0", new BCryptPasswordEncoder().encode("root0"),"", "localhost",true);
+        admin.addRole(new Role("ROLE_ADMIN", admin));
+        adminDAO.addEntity(admin);*/
+
+        if(adminService.getById(1) != null){
+            System.out.println("admin already exists");
+            return;
+        }
+
         Admin admin = new Admin(1, "root0", new BCryptPasswordEncoder().encode("root0"),"", "localhost",true);
         admin.addRole(new Role("ROLE_ADMIN", admin));
         adminDAO.addEntity(admin);

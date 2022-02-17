@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -45,7 +46,10 @@ public class AdminDAOImpl implements EntityDAO {
     @Override
     public Admin getEntity(String username) {
         Session session = entityManager.unwrap(Session.class);
-        Admin admin = session.createQuery("select a from Admin a where a.username= :username", Admin.class).setParameter("username", username).getSingleResult();
-        return admin;
+        Query adminQ = session.createQuery("select a from Admin a where a.username= :username", Admin.class).setParameter("username", username);
+        if(adminQ == null)
+            return null;
+
+        return (Admin) adminQ.getSingleResult();
     }
 }
