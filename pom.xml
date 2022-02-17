@@ -10,10 +10,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>gr.ds</groupId>
-    <artifactId>rest-api</artifactId>
+    <artifactId>ds-backend-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rest-api</name>
-    <description>rest-api</description>
+    <name>ds-backend-project</name>
+    <description>ds-backend-project</description>
     <properties>
         <java.version>17</java.version>
     </properties>
