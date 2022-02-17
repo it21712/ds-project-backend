@@ -12,8 +12,8 @@
     <groupId>gr.ds</groupId>
     <artifactId>ds-backend-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ds-backend-project</name>
-    <description>ds-backend-project</description>
+    <name>restapi</name>
+    <description>DS backend Server</description>
     <properties>
         <java.version>11</java.version>
     </properties>
