@@ -10,8 +10,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
-import java.beans.Transient;
 
 @Component
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -24,22 +22,15 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     public void createAdminIfNotExists(){
 
-        /*if(adminDAO.getEntity("root0") != null) {
+        if(adminDAO.getEntity("root0") != null) {
             System.out.println("admin already exists");
             return;
         }
-        Admin admin = new Admin(1, "root0", new BCryptPasswordEncoder().encode("root0"),"", "localhost",true);
-        admin.addRole(new Role("ROLE_ADMIN", admin));
-        adminDAO.addEntity(admin);*/
-
-        if(adminService.getById(1) != null){
-            System.out.println("admin already exists");
-            return;
-        }
-
         Admin admin = new Admin(1, "root0", new BCryptPasswordEncoder().encode("root0"),"", "localhost",true);
         admin.addRole(new Role("ROLE_ADMIN", admin));
         adminDAO.addEntity(admin);
+
+
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -46,10 +47,17 @@ public class AdminDAOImpl implements EntityDAO {
     @Override
     public Admin getEntity(String username) {
         Session session = entityManager.unwrap(Session.class);
-        Query adminQ = session.createQuery("select a from Admin a where a.username= :username", Admin.class).setParameter("username", username);
-        if(adminQ == null)
-            return null;
 
-        return (Admin) adminQ.getSingleResult();
+        try {
+            Query adminQ = session.createQuery("select a from Admin a where a.username= :username", Admin.class).setParameter("username", username);
+            Admin admin = (Admin) adminQ.getSingleResult();
+            return admin;
+        }catch (NoResultException e){
+            System.out.println("No administrator was found on the system.\nCreating one for you with the following credentials: username:root0, password:root0");
+            return null;
+        }
+
+
+
     }
 }
