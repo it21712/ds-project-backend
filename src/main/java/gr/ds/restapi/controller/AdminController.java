@@ -33,6 +33,9 @@ public class AdminController {
     @Autowired
     EntityDAO<CivicOfficial> civicDAO;
 
+    @Autowired
+    EntityDAO<Role> roleDAO;
+
     @GetMapping("/all")
     public String getUsers(Model model){
         List<User> users = userService.findAll();
@@ -91,7 +94,7 @@ public class AdminController {
     @GetMapping("/delete/{username}")
     public String deleteUser(@PathVariable String username){
         User user = userService.findByUsername(username);
-        roleService.deleteByUserId(user.getId());
+        //roleService.deleteByUserId(user.getId());
         userService.deleteUserByUsername(username);
         return "success-form";
     }
@@ -101,7 +104,6 @@ public class AdminController {
     public String updateUser(@PathVariable String username, Model model){
 
         User user = userService.getUserByUsername(username);
-        System.out.println(user.getRoles());
         System.out.println(user.getId());
         model.addAttribute("user", user);
 
@@ -147,9 +149,10 @@ public class AdminController {
     @PostMapping("/add-citizen")
     public String addCitizenSubmit(@ModelAttribute Citizen citizen){
 
-        System.out.println("id: "+citizen.getId());
+        System.out.println("id: "+citizen.getCode());
         citizen.setPasscode(new BCryptPasswordEncoder().encode(citizen.getPasscode()));
-        citizen.addRole(new Role("ROLE_CITIZEN", citizen));
+        Role citizenRole = roleDAO.getEntity("ROLE_CITIZEN");
+        citizen.addRole(citizenRole);
         citizenDAO.addEntity(citizen);
 
         return "success-form";
@@ -168,7 +171,7 @@ public class AdminController {
     public String updateCitizenSubmit(@ModelAttribute Citizen citizen){ //TODO add roles to add citizen and update citizen
 
         Citizen dbCitizen = citizenService.getCitizenByCode(citizen.getCode());
-        System.out.println(dbCitizen.getRoles());
+
         dbCitizen.setUsername(citizen.getUsername());
         dbCitizen.setPasscode(citizen.getPasscode());
         dbCitizen.setFullName(citizen.getFullName());
@@ -200,7 +203,8 @@ public class AdminController {
 
         vet.setPasscode(new BCryptPasswordEncoder().encode(vet.getPasscode()));
 
-        vet.addRole(new Role("ROLE_VET", vet));
+        Role vetRole = roleDAO.getEntity("ROLE_VET");
+        vet.addRole(vetRole);
         vetDAO.addEntity(vet);
 
         return "success-form";
@@ -219,7 +223,7 @@ public class AdminController {
     public String updateVetSubmit(@ModelAttribute Vet vet){
 
         Vet dbVet = vetService.getVetByCode(vet.getCode());
-        System.out.println(vet.getRoles());
+
         dbVet.setUsername(vet.getUsername());
         dbVet.setPasscode(vet.getPasscode());
         dbVet.setFullName(vet.getFullName());
@@ -247,7 +251,9 @@ public class AdminController {
     public String addCivicSubmit(@ModelAttribute CivicOfficial civic){
 
         civic.setPasscode(new BCryptPasswordEncoder().encode(civic.getPasscode()));
-        civic.addRole(new Role("ROLE_CIVIC", civic));
+
+        Role civicRole = roleDAO.getEntity("ROLE_CIVIC");
+        civic.addRole(civicRole);
         civicDAO.addEntity(civic);
 
         return "success-form";
@@ -266,7 +272,7 @@ public class AdminController {
     public String updateCivicSubmit(@ModelAttribute CivicOfficial civic){
 
         CivicOfficial dbCivic = civicService.getCivicOfficialByCode(civic.getCode());
-        System.out.println(civic.getRoles());
+
         dbCivic.setUsername(civic.getUsername());
         dbCivic.setPasscode(civic.getPasscode());
         dbCivic.setFullName(civic.getFullName());
@@ -286,7 +292,7 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-
+    //TODO add all user info on update user
     @GetMapping("/update-root/{id}")
     public String updateRoot(@PathVariable int id, Model model){
 
@@ -300,7 +306,6 @@ public class AdminController {
     public String updateRootSubmit(@ModelAttribute Admin admin){
 
         Admin dbAdmin = adminService.getById(admin.getId());
-        //System.out.println(admin.getRoles());
         dbAdmin.setUsername(admin.getUsername());
         dbAdmin.setPasscode(admin.getPasscode());
         dbAdmin.setFullName(admin.getFullName());

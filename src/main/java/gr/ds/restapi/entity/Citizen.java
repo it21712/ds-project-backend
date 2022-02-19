@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Citizen extends User {
+public class Citizen extends User implements Serializable {
 
 
     @Column(name = "code")
@@ -53,7 +54,7 @@ public class Citizen extends User {
         this.setEnabled(enabled);
     }
 
-    public Citizen(int id, int code, String username, String passCode, String fullName, String region, String address, int phoneNumber, String email, boolean enabled, Set<Role> roles){
+    public Citizen(int id, int code, String username, String passCode, String fullName, String region, String address, int phoneNumber, String email, boolean enabled, Role role){
         this.code = code;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -64,7 +65,7 @@ public class Citizen extends User {
         this.setUsername(username);
         this.setPasscode(passCode);
         this.setEnabled(enabled);
-        this.setRoles(roles);
+        this.setRole(role);
     }
 
     public Citizen(String fullName, String region, String address, int phoneNumber){

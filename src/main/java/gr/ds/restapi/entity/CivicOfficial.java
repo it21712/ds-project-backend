@@ -1,12 +1,13 @@
 package gr.ds.restapi.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "civic_official")
 @PrimaryKeyJoinColumn(name = "id")
-public class CivicOfficial extends User{
+public class CivicOfficial extends User implements Serializable {
 
     @Column(name="code")
     private int code;

@@ -4,9 +4,10 @@ package gr.ds.restapi.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class MedicalHistory {
+public class MedicalHistory implements Serializable {
 
     @Id
     @Column(name = "id")

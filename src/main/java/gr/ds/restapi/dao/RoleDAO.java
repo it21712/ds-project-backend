@@ -1,7 +1,8 @@
 package gr.ds.restapi.dao;
 
 import gr.ds.restapi.entity.Admin;
-import gr.ds.restapi.entity.User;
+import gr.ds.restapi.entity.Citizen;
+import gr.ds.restapi.entity.Role;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -9,27 +10,24 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class AdminDAOImpl implements EntityDAO {
+public class RoleDAO implements EntityDAO<Role>{
+
 
     @PersistenceContext
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     @Override
-    public List showALl() {
+    public List<Role> showALl() {
         return null;
     }
 
     @Override
-    @Transactional
-    public int addEntity(Object user) {
-
+    public int addEntity(Role entity) {
         Session session = entityManager.unwrap(Session.class);
-
-        session.save(user);
+        session.save(entity);
         session.close();
         return 0;
     }
@@ -40,23 +38,22 @@ public class AdminDAOImpl implements EntityDAO {
     }
 
     @Override
-    public int updateEntity(Object user) {
+    public int updateEntity(Role entity) {
+
         return 0;
     }
 
     @Override
-    public Admin getEntity(String username) {
+    public Role getEntity(String name) {
         Session session = entityManager.unwrap(Session.class);
 
         try {
-            Query adminQ = session.createQuery("select a from Admin a where a.username= :username", Admin.class).setParameter("username", username);
-            Admin admin = (Admin) adminQ.getSingleResult();
-            return admin;
+
+            Query roleQ = session.createQuery("select r from Role r where r.name=:name", Role.class).setParameter("name", name);
+            Role role = (Role) roleQ.getSingleResult();
+            return role;
         }catch (NoResultException e){
             return null;
         }
-
-
-
     }
 }

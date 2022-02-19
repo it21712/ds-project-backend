@@ -1,11 +1,12 @@
 package gr.ds.restapi.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Vet  extends User{
+public class Vet  extends User implements Serializable {
 
     @Column(name = "name")
     private String name;

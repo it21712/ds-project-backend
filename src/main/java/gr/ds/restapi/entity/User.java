@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,32 +35,34 @@ public class User {
     private boolean enabled;
 
 
-    /*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "user")
+    @ManyToOne
+    @JoinColumn(name="role_id"/*, nullable = false*/)
+    @JsonIgnoreProperties("role")
+    private Role role;
+
+    /*@ManyToMany
     @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-
-    )
-    private Set<Role> roles = new HashSet<>();*/
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "user_id"))
     @JsonIgnoreProperties("user")
     private Set<Role> roles = new HashSet<>();
-
+*/
 
 
     public void addRole(Role role) {
-        roles.add(role);
+        this.role=role;
     }
-    public void removeRole(Role role){roles.remove(role);}
+    //public void removeRole(Role role){roles.remove(role);}
 
-    public void removeRoles(){
+   /* public void removeRoles(){
         for (Role r: roles
              ) {
             roles.remove(r);
         }
-    }
+    }*/
 
 
     public User(){}
@@ -128,10 +131,18 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Set<Role> getRoles() {
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    /*public Set<Role> getRoles() {
         return this.roles;
     }
 
-    public void setRoles(Set<Role> roles){this.roles=roles;}
+    public void setRoles(Set<Role> roles){this.roles=roles;}*/
 
 }

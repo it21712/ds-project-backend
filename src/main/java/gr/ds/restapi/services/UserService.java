@@ -25,7 +25,7 @@ public class UserService implements UserRepository {
     @Override
     public void deleteUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        user.removeRoles();
+        //user.removeRoles(); //TODO fix
         userRepository.deleteUserByUsername(username);
     }
 

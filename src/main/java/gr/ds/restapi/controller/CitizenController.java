@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.Citizen;
 import gr.ds.restapi.entity.Pet;
+import gr.ds.restapi.services.CustomUserDetails;
 import gr.ds.restapi.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,15 +36,23 @@ public class CitizenController {
     IPetService petService;*/
 
     @Autowired
+    CustomUserDetails userDetails;
+
+    @Autowired
     PetService petService;
 
     @GetMapping("/home")
     public String CitizenInfo() throws JsonProcessingException {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication auth = context.getAuthentication();
         String username = auth.getName();
 
+
+        System.out.println("Citizen has the following privileges: " + userDetails.loadUserByUsername(username).getAuthorities());
+
+        System.out.println(auth.getAuthorities());
         Citizen citizen = citizenDAO.getEntity(username);
 
         ObjectMapper mapper = new ObjectMapper();

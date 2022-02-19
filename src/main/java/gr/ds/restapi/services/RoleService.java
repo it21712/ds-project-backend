@@ -167,7 +167,7 @@ public class RoleService implements RoleRepository {
         return null;
     }
 
-    @Override
+    /*@Override
     public void deleteByUserId(Integer integer) {
         List<Role> roles = roleRepository.findByUserId(integer);
         for (Role r:roles
@@ -176,10 +176,10 @@ public class RoleService implements RoleRepository {
             roleRepository.deleteById(r.getId());
         }
 
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Role> findByUserId(Integer integer) {
         return roleRepository.findByUserId(integer);
-    }
+    }*/
 }
