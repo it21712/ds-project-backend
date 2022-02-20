@@ -27,7 +27,7 @@ public class Citizen extends User implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy = "citizen", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "citizen", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonIgnoreProperties("citizen")
     private List<Pet> pets = new ArrayList<>();
 
@@ -121,6 +121,10 @@ public class Citizen extends User implements Serializable {
     }
 
     public List<Pet> getPets(){ return pets; }
+
+    public void deletePets(){
+        this.pets.clear();
+    }
 
     @Override
     public String toString(){

@@ -19,7 +19,7 @@ public class Pet implements Serializable {
     @Column(name = "owner_code",insertable=false, updatable=false)
     private int ownerCode;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name ="owner_code", referencedColumnName = "id")
     @JsonIgnoreProperties("pets")
     private Citizen citizen;
@@ -39,7 +39,7 @@ public class Pet implements Serializable {
     @Column(name = "is_approved")
     private int is_approved;
 
-    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonIgnoreProperties("pet")
     private List<MedicalHistory> medicalOps = new ArrayList<>();
 
@@ -173,4 +173,9 @@ public class Pet implements Serializable {
     public void setIs_approved(int is_approved) {
         this.is_approved = is_approved;
     }
+
+    public void deleteMedOps(){
+        this.medicalOps.clear();
+    }
+
 }

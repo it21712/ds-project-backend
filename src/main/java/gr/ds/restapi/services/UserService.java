@@ -1,6 +1,8 @@
 package gr.ds.restapi.services;
 
 import gr.ds.restapi.dao.UserRepository;
+import gr.ds.restapi.entity.Citizen;
+import gr.ds.restapi.entity.Pet;
 import gr.ds.restapi.entity.Role;
 import gr.ds.restapi.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,12 @@ public class UserService implements UserRepository {
     public void deleteUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         //user.removeRoles(); //TODO fix
+        if(user.getClass().equals(Citizen.class)){
+            Citizen c = (Citizen) user;
+            for (Pet p : c.getPets())
+                p.deleteMedOps();
+            c.deletePets();
+        }
         userRepository.deleteUserByUsername(username);
     }
 
