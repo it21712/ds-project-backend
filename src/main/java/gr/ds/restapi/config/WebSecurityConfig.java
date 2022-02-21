@@ -72,8 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().accessDeniedPage("/welcome/error")
                 .and().csrf().disable().headers().frameOptions().disable()
-                .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll().deleteCookies("JSESSIONID").invalidateHttpSession(true)/*.clearAuthentication(true).deleteCookies("JSESSIONID")
+                .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
+                .and().logout().permitAll()/*.deleteCookies("JSESSIONID").invalidateHttpSession(true)*//*.clearAuthentication(true).deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)*/;
 
     }
