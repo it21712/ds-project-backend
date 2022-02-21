@@ -2,21 +2,14 @@ package gr.ds.restapi.controller;
 
 
 import gr.ds.restapi.dao.EntityDAO;
-import gr.ds.restapi.dao.VetRepository;
 import gr.ds.restapi.entity.*;
 import gr.ds.restapi.services.*;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Controller
@@ -57,7 +50,7 @@ public class AdminController {
     }
 
     @GetMapping("/{usertype}/all") //TODO
-    public String listCitizens(@PathVariable String usertype, Model model){
+    public String getUsersByType(@PathVariable String usertype, Model model){
 
 
         switch (usertype){
