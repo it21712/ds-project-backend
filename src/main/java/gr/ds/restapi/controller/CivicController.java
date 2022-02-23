@@ -2,7 +2,7 @@ package gr.ds.restapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+
 import gr.ds.restapi.dao.PetRepository;
 import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.CivicOfficial;

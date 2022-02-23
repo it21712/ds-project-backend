@@ -2,7 +2,7 @@ package gr.ds.restapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+
 
 import gr.ds.restapi.dao.EntityDAO;
 import gr.ds.restapi.entity.Citizen;
@@ -94,7 +94,7 @@ public class CitizenController {
 
     }
 
-    @GetMapping("/pending-pets")
+    /*@GetMapping("/pending-pets")
     public String pendingPets(){
 
         SecurityContext context = SecurityContextHolder.getContext();
@@ -107,7 +107,7 @@ public class CitizenController {
 
         return json;
 
-    }
+    }*/
 
 
 

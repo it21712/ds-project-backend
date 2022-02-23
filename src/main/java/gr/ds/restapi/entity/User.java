@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 
@@ -16,18 +18,22 @@ public class User implements Serializable {
     @Column(name = "user_id", updatable = false)
     private int id;
 
+    @NotBlank
     @Column(name = "username", unique = true)
     @NonNull
     private String username;
 
+    @NotBlank
     @Column(name = "passcode")
     @NonNull
     private String passcode;
 
-    @Column(name = "full_name")
+    @NotBlank
+    @Column(name = "full_name", unique = true)
     @NonNull
     private String fullName;
 
+    @NotBlank
     @Column(name = "region")
     private String region;
 

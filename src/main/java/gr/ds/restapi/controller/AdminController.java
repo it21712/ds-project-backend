@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -140,8 +142,9 @@ public class AdminController {
     }
 
     @PostMapping("/add-citizen")
-    public String addCitizenSubmit(@ModelAttribute Citizen citizen){
+    public String addCitizenSubmit(@Valid @ModelAttribute Citizen citizen, BindingResult bindingResult){
 
+        if(bindingResult.hasErrors())return "citizen-add-form";
         System.out.println("id: "+citizen.getCode());
         citizen.setPasscode(new BCryptPasswordEncoder().encode(citizen.getPasscode()));
         Role citizenRole = roleDAO.getEntity("ROLE_CITIZEN");
@@ -161,7 +164,9 @@ public class AdminController {
         return "citizen-update-form";
     }
     @PostMapping("/update-citizen/{code}")
-    public String updateCitizenSubmit(@ModelAttribute Citizen citizen){ //TODO add roles to add citizen and update citizen
+    public String updateCitizenSubmit(@Valid @ModelAttribute Citizen citizen, BindingResult bindingResult){ //TODO add roles to add citizen and update citizen
+
+        if(bindingResult.hasErrors())  return "citizen-update-form";
 
         Citizen dbCitizen = citizenService.getCitizenByCode(citizen.getCode());
 
@@ -192,8 +197,9 @@ public class AdminController {
     }
 
     @PostMapping("/add-vet")
-    public String addVetSubmit(@ModelAttribute Vet vet){
+    public String addVetSubmit(@Valid @ModelAttribute Vet vet, BindingResult bindingResult){
 
+        if(bindingResult.hasErrors()) return "vet-add-form";
         vet.setPasscode(new BCryptPasswordEncoder().encode(vet.getPasscode()));
 
         Role vetRole = roleDAO.getEntity("ROLE_VET");
@@ -213,7 +219,9 @@ public class AdminController {
     }
 
     @PostMapping("/update-vet/{code}")
-    public String updateVetSubmit(@ModelAttribute Vet vet){
+    public String updateVetSubmit(@Valid @ModelAttribute Vet vet, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()) return "vet-update-form";
 
         Vet dbVet = vetService.getVetByCode(vet.getCode());
 
@@ -241,8 +249,9 @@ public class AdminController {
     }
 
     @PostMapping("/add-civic")
-    public String addCivicSubmit(@ModelAttribute CivicOfficial civic){
+    public String addCivicSubmit(@Valid @ModelAttribute CivicOfficial civic, BindingResult bindingResult){
 
+        if(bindingResult.hasErrors()) return "civic-add-form";
         civic.setPasscode(new BCryptPasswordEncoder().encode(civic.getPasscode()));
 
         Role civicRole = roleDAO.getEntity("ROLE_CIVIC");
@@ -262,8 +271,9 @@ public class AdminController {
     }
 
     @PostMapping("/update-civic/{code}")
-    public String updateCivicSubmit(@ModelAttribute CivicOfficial civic){
+    public String updateCivicSubmit(@Valid @ModelAttribute CivicOfficial civic, BindingResult bindingResult){
 
+        if(bindingResult.hasErrors()) return "civic-update-form";
         CivicOfficial dbCivic = civicService.getCivicOfficialByCode(civic.getCode());
 
         dbCivic.setUsername(civic.getUsername());
@@ -296,8 +306,9 @@ public class AdminController {
     }
 
     @PostMapping("/update-root/{id}")
-    public String updateRootSubmit(@ModelAttribute Admin admin){
+    public String updateRootSubmit(@Valid @ModelAttribute Admin admin, BindingResult bindingResult){
 
+        if(bindingResult.hasErrors())  return "root-update-form";
         Admin dbAdmin = adminService.getById(admin.getId());
         dbAdmin.setUsername(admin.getUsername());
         dbAdmin.setPasscode(admin.getPasscode());

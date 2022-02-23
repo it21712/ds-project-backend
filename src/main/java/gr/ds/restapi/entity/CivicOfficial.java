@@ -1,6 +1,7 @@
 package gr.ds.restapi.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @PrimaryKeyJoinColumn(name = "id")
 public class CivicOfficial extends User implements Serializable {
 
+    @NotNull
     @Column(name="code")
     private int code;
 

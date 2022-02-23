@@ -40,7 +40,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         }
         System.out.println("No administrator was found on the system.\nCreating one for you with the following credentials: username:root0, password:root0");
 
-        Admin admin = new Admin(1, "root0", new BCryptPasswordEncoder().encode("root0"),"", "localhost",true);
+        Admin admin = new Admin(1, "root0", new BCryptPasswordEncoder().encode("root0"),"admin", "localhost",true);
         admin.addRole(role);
         adminDAO.addEntity(admin);
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.Set;
 @PrimaryKeyJoinColumn(name = "id")
 public class Citizen extends User implements Serializable {
 
-
+    @NotNull(message = "Field cannot be empty")
+    @Min(1100)
     @Column(name = "code")
     private int code;
 
@@ -22,8 +24,9 @@ public class Citizen extends User implements Serializable {
     private String address;
 
     @Column(name = "phone_number")
-    private int phoneNumber;
+    private long phoneNumber;
 
+    @Email(message = "Please enter a valid e-mail address")
     @Column(name = "email")
     private String email;
 
@@ -41,7 +44,7 @@ public class Citizen extends User implements Serializable {
         this.email = email;
     }
 
-    public Citizen(int id, int code, String username, String passCode, String fullName, String region, String address, int phoneNumber, String email, boolean enabled){
+    public Citizen(int id, int code, String username, String passCode, String fullName, String region, String address, long phoneNumber, String email, boolean enabled){
         this.code = code;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -54,7 +57,7 @@ public class Citizen extends User implements Serializable {
         this.setEnabled(enabled);
     }
 
-    public Citizen(int id, int code, String username, String passCode, String fullName, String region, String address, int phoneNumber, String email, boolean enabled, Role role){
+    public Citizen(int id, int code, String username, String passCode, String fullName, String region, String address, long phoneNumber, String email, boolean enabled, Role role){
         this.code = code;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -104,11 +107,11 @@ public class Citizen extends User implements Serializable {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

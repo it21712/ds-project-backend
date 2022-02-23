@@ -1,6 +1,8 @@
 package gr.ds.restapi.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -8,9 +10,11 @@ import java.io.Serializable;
 @PrimaryKeyJoinColumn(name = "id")
 public class Vet  extends User implements Serializable {
 
+    @NotBlank
     @Column(name = "name")
     private String name;
 
+    @NotNull
     @Column(name="code")
     private int code;
 

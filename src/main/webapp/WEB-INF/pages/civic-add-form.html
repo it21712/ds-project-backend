@@ -8,31 +8,6 @@
 <body>
 <h1>Civic Official Data</h1>
 
-<!--<div id="form-box">
-    <form action="#" th:action="@{/api/root/users/add-civic}" th:object="${civic}" method="post">
-
-        <div id="left-input">
-            <label>Code: <input type="number" th:field="${civic.code}" /></label>
-            <label>Username: <input type="text" th:field="${civic.username}" /></label>
-            <label>Passcode: <input type="text" th:field="${civic.passcode}" /></label>
-
-        </div>
-
-        <div id="right-input">
-            <label>Full Name: <input type="text" th:field="${civic.fullName}" /></label>
-            <label>Region: <input type="text" th:field="${civic.region}" /></label>
-            <label>Enabled: <input type="checkbox" th:field="${civic.enabled}" checked="0"/></label>
-        </div>
-
-        <div>
-            <label><input type="submit" value="Add" /> <input type="reset" value="Reset" /></label>
-        </div>
-
-
-    </form>
-</div>-->
-
-
 
 <form id="form-box" action="#" th:action="@{/api/root/users/add-civic}" th:object="${civic}" method="post">
 
@@ -42,7 +17,7 @@
     <label>Full Name <input type="text" th:field="${civic.fullName}" /></label>
     <label>Region <input type="text" th:field="${civic.region}" /></label>
     <label>Enabled <input type="checkbox" th:field="${civic.enabled}" checked="0"/></label>
-
+    <span th:if="${#fields.hasErrors()}">There were some errors in this form</span>
     <input type="submit" value="Add" />
     <input type="reset" value="Reset" />
 

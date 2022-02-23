@@ -14,6 +14,7 @@
     <label>Full Name: <input type="text" th:field="${user.fullName}" th:value="${user.getFullName()}"/></label>
     <label>Region: <input type="text" th:field="${user.region}" th:value="${user.getRegion()}"/></label>
     <label>Enabled: <input type="checkbox" th:field="${user.enabled}" th:value="${user.getEnabled()}"/></label>
+    <span th:if="${#fields.hasErrors()}">There were some errors in this form</span>
 
     <input type="submit" value="Update" />
     <input type="reset" value="Reset" />

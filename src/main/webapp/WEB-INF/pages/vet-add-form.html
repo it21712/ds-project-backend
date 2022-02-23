@@ -15,6 +15,7 @@
     <label>Region: <input type="text" th:field="${vet.region}" /></label>
     <label>Veterinary Name: <input type="text" th:field="${vet.name}" /></label>
     <label>Enabled: <input type="checkbox" th:field="${vet.enabled}" checked="0"/></label>
+    <span th:if="${#fields.hasErrors()}">There were some errors in this form</span>
 
     <input type="submit" value="Add" />
     <input type="reset" value="Reset" />

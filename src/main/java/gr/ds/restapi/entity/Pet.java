@@ -3,6 +3,8 @@ package gr.ds.restapi.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +14,12 @@ import java.util.List;
 
 public class Pet implements Serializable {
 
+    @NotNull
     @Id
     @Column(name = "serial_number")
     private int serialNumber;
 
+    @NotNull
     @Column(name = "owner_code",insertable=false, updatable=false)
     private int ownerCode;
 
@@ -24,18 +28,23 @@ public class Pet implements Serializable {
     @JsonIgnoreProperties("pets")
     private Citizen citizen;
 
+    @NotBlank
     @Column(name = "type")
     private String type;
 
+    @NotBlank
     @Column(name = "race")
     private String race;
 
+    @NotBlank
     @Column(name = "sex")
     private String sex;
 
+    @NotBlank
     @Column(name = "birth_date")
     private String birthDate;
 
+    @NotNull
     @Column(name = "is_approved")
     private int is_approved;
 

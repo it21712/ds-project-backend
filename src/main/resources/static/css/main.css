@@ -202,3 +202,8 @@ label{
     justify-content: space-evenly;
 
 }
+
+span {
+    color: red;
+    font-style: italic;
+}

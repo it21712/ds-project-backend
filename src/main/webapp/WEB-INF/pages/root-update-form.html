@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
     <meta charset="UTF-8">
     <title>Update Root</title>
 </head>
 <body>
 <h1>Root Data</h1>
-<form action="#" th:action="@{/api/root/users/update-root/{id}(id = root.id)}" th:object="${root}" method="post">
+<form id="form-box"  action="#" th:action="@{/api/root/users/update-root/{id}(id = root.id)}" th:object="${root}" method="post">
     <p hidden>Id: <textarea th:field="${root.id}" th:value="${root.getId()}"/></p>
-    <p>Username: <input type="text" th:field="${root.username}" th:value="${root.getUsername()}"/></p>
-    <p>Passcode: <input type="text" th:field="${root.passcode}" th:value="${root.getPasscode()}"/></p>
-    <p>Full Name: <input type="text" th:field="${root.fullName}" th:value="${root.getFullName()}"/></p>
-    <p>Region: <input type="text" th:field="${root.region}" th:value="${root.getRegion()}"/></p>
-    <p>Enabled: <input type="checkbox" th:field="${root.enabled}" th:value="${root.getEnabled()}"/></p>
-    <p><input type="submit" value="Update" /> <input type="reset" value="Reset" /></p>
+    <label>Username: <input type="text" th:field="${root.username}" th:value="${root.getUsername()}"/></label>
+    <label>Passcode: <input type="text" th:field="${root.passcode}" th:value="${root.getPasscode()}"/></label>
+    <label>Full Name: <input type="text" th:field="${root.fullName}" th:value="${root.getFullName()}"/></label>
+    <label>Region: <input type="text" th:field="${root.region}" th:value="${root.getRegion()}"/></label>
+    <label>Enabled: <input type="checkbox" th:field="${root.enabled}" th:value="${root.getEnabled()}"/></label>
+    <span th:if="${#fields.hasErrors()}">There were some errors in this form</span>
+    <label><input type="submit" value="Update" /> <input type="reset" value="Reset" /></label>
 </form>
 </body>
 </html>
