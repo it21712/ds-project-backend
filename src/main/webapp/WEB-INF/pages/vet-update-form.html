@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Vet Data</h1>
-<form action="#" th:action="@{/api/root/users/update-vet/{code}(code = vet.code)}" th:object="${vet}" method="post">
+<form id="form-box" action="#" th:action="@{/api/root/users/update-vet/{code}(code = vet.code)}" th:object="${vet}" method="post">
     <p hidden>Id: <textarea th:field="${vet.id}" th:value="${vet.getId()}"/></p>
     <p hidden>Code: <input type="number" th:field="${vet.code}" th:value="${vet.getCode()}"/></p>
     <label>Username: <input type="text" th:field="${vet.username}" th:value="${vet.getUsername()}"/></label>

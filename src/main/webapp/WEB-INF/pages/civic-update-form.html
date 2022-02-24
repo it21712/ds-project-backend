@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Civic Official Data</h1>
-<form action="#" th:action="@{/api/root/users/update-civic/{code}(code = civic.code)}" th:object="${civic}" method="post">
+<form id="form-box" action="#" th:action="@{/api/root/users/update-civic/{code}(code = civic.code)}" th:object="${civic}" method="post">
     <p hidden>Id: <textarea th:field="${civic.id}" th:value="${civic.getId()}"/></p>
     <p hidden>Code: <input type="number" th:field="${civic.code}" th:value="${civic.getCode()}"/></p>
     <label>Username: <input type="text" th:field="${civic.username}" th:value="${civic.getUsername()}"/></label>
